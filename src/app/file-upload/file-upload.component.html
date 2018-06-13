@@ -1,0 +1,26 @@
+<div class="center">
+  <form [formGroup]="fileUploadForm">
+    <input type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)">
+    <button type="submit">Submit</button>
+  </form>
+  <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+  </file-drop>
+  <div class="upload-table">
+    <table datatable class="row-border hover">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Size</th>
+          <th>File Uploaded Status</th>
+        </tr>
+      </thead>
+      <tbody class="upload-name-style">
+        <tr *ngFor="let item of files; let i=index">
+          <td>
+            <strong>{{ item.relativePath }}</strong>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

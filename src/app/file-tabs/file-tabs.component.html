@@ -1,0 +1,12 @@
+<div class="card">
+  <div class="card-header">
+    <ul class="nav nav-tabs card-header-tabs">
+      <li *ngFor="let file of fileList; let i = index" class="nav-item">
+        <a class="nav-link active" href="#">{{fileList[i]}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="card-body">
+    <app-tree-view></app-tree-view>
+  </div>
+</div>
