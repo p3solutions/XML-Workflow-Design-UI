@@ -1,6 +1,6 @@
 <div class="center">
   <form [formGroup]="fileUploadForm">
-    <input type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)">
+    <input type="file" name="files" multiple required formControlName="files" placeholder="Select File" (change)="onFileUpload($event.target.files)">
     <button type="submit">Submit</button>
   </form>
   <file-drop headertext="Drop files here" (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
