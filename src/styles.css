@@ -8444,3 +8444,15 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=styles.css.map */
+
+.custom-dropzone-style {
+  margin: auto;
+  padding: 5px;
+  height: 100%;
+  border: 2px dotted #0782d0;
+  border-radius: 5px;
+}
+.custom-dropzone-style .content {
+  color: #000 !important;
+  height: 100% !important;
+}
