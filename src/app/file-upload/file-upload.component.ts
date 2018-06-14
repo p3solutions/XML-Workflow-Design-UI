@@ -25,7 +25,7 @@ export class FileUploadComponent implements OnInit {
   }
   createForm() {
     this.fileUploadForm = this.formBuilder.group({
-      files: ''
+      fileUpload: ''
     });
   }
 

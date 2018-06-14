@@ -1,0 +1,25 @@
+.file-upload-box {
+    /* background-color: rgba(73, 148, 207, 0.46); */
+    background-color: rgba(177, 177, 177, 0.15);
+    height: 550px;
+}
+.file-upload-form {
+    padding: 15px 0;
+}
+.file-upload-form .browse-btn {
+    height: 45px;
+}
+.file-upload-form .submit-btn {
+    padding: 9px 20px;
+    margin: 0 10px;
+    height: 45px;
+}
+/* .file-drop-header {
+    top: 0;
+    left: 45%;
+    position: absolute;
+} */
+.drop-content {
+    width: 100%;
+    height: 100%;
+}
