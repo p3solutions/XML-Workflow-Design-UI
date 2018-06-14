@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable, of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { FileInfo } from '../file-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileUploadService {
-  private headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  private fileUploadUrl = environment.apiUrl + 'fileUpload';
+  private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  private fileUploadUrl = 'http://localhost:9000/api/upload/multi';
+  // environment.apiUrl + 'fileUpload';
   constructor(private http: HttpClient) { }
-  uploadFile(formData: FormData): Observable<any> {
-    return this.http.post<FileInfo[]>(this.fileUploadUrl, formData, { headers: this.headers });
+  uploadFile(fileToUpload: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.set('files', fileToUpload, fileToUpload.name);
+    console.log(formData);
+    return this.http.post(this.fileUploadUrl, formData);
   }
 }

@@ -18,6 +18,7 @@ import { FileUploadStepComponent } from './file-upload-step/file-upload-step.com
 import { DefinitionStepComponent } from './definition-step/definition-step.component';
 import { VerificationStepComponent } from './verification-step/verification-step.component';
 import { StructureDefinitionComponent } from './structure-definition/structure-definition.component';
+import { FileUploadService } from './file-upload/file-upload.service';
 
 @NgModule({
   declarations: [
@@ -39,11 +40,11 @@ import { StructureDefinitionComponent } from './structure-definition/structure-d
     DataTablesModule,
     HttpClientModule,
     ReactiveFormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+    // HttpClientInMemoryWebApiModule.forRoot(
+    //   InMemoryDataService, { dataEncapsulation: false }
+    // )
   ],
-  providers: [],
+  providers: [FileUploadService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

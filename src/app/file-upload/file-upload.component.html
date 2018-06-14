@@ -1,16 +1,15 @@
 <div class="center file-upload-box">
   <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" customstyle="custom-dropzone-style">
-    
+
     <div class="drop-content col">
-        <div class="col-md-12 text-center">Drop files below</div>
-        <div class="file-upload-form">
-          <form [formGroup]="fileUploadForm">
-            <input type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File"
-             (change)="onFileUpload($event.target.files)" class="btn btn-secondary browse-btn">
-            <button type="submit" class="btn btn-secondary submit-btn">Submit</button>
+      <div class="col-md-12 text-center">Drop files below</div>
+      <div class="file-upload-form">
+        <form [formGroup]="fileUploadForm">
+          <input type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)"
+            class="btn btn-secondary browse-btn">
+          <button type="submit" class="btn btn-secondary submit-btn">Submit</button>
         </form>
       </div>
-      
       <div class="upload-table">
         <table datatable class="row-border hover">
           <thead>
@@ -30,6 +29,5 @@
         </table>
       </div>
     </div>
-    
   </file-drop>
 </div>
