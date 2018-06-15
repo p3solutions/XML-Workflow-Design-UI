@@ -6,6 +6,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InMemoryDataService } from './in-memory-data/in-memory-data.service';
+import { TreeModule } from 'angular-tree-component';
+
 
 import { AppComponent } from './app.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
@@ -40,6 +42,7 @@ import { FileUploadService } from './file-upload/file-upload.service';
     DataTablesModule,
     HttpClientModule,
     ReactiveFormsModule,
+    TreeModule
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
