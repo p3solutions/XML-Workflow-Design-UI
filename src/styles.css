@@ -4,7 +4,7 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@import url(/Users/saideepak/Projects/JPMC/CFW_Workflow_Design/cfw-workflow-design/node_modules/angular-tree-component/dist/angular-tree-component.css);
+@import url('../node_modules/angular-tree-component/dist/angular-tree-component.css');
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -5675,6 +5675,7 @@ button.close {
 
 .bg-primary {
   background-color: #a7ffeb !important;
+  margin-bottom: 30px;
 }
 
 a.bg-primary:hover, a.bg-primary:focus,
@@ -8445,3 +8446,12 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=styles.css.map */
+.m-l-20 {
+  margin-left: 20px;
+}
+.m-r-20 {
+  margin-right: 20px;
+}
+.m-20 {
+  margin: 20px;
+}
