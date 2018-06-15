@@ -6,3 +6,32 @@
   font-size: 25px;
   font-weight: 500;
 }
+.nav-btn-container {
+  height: 40px;
+  position: absolute;
+  bottom: -20px;
+  left: 70%;
+}
+.nav-btn {
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  /* border: none; */
+  margin: 0 20px;
+  cursor: pointer;
+  background-color: #F7F7F7;
+  outline: none;
+}
+.nav-btn:hover {
+  background: white;
+}
+.hide-prev .prev-btn {
+  display: none;
+}
+.hide-ok .ok-btn {
+  display: none;
+}
+.hide-next .next-btn {
+  display: none;
+}
+
