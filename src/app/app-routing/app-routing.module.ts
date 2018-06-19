@@ -4,6 +4,7 @@ import { BaseLandingPageComponent } from '../base-landing-page/base-landing-page
 import { FileUploadStepComponent } from '../file-upload-step/file-upload-step.component';
 import { DefinitionStepComponent } from '../definition-step/definition-step.component';
 import { VerificationStepComponent } from '../verification-step/verification-step.component';
+import { TreeViewComponent } from '../tree-view/tree-view.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,11 @@ const routes: Routes = [
         path: 'file-upload', component: FileUploadStepComponent
       },
       {
-        path: 'definition', component: DefinitionStepComponent
+        path: 'definition', component: DefinitionStepComponent, children: [
+          {
+            path: 'tree/:name', component: TreeViewComponent
+          }
+        ]
       },
       {
         path: 'verification', component: VerificationStepComponent

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { v4 } from 'uuid';
 import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { TreeViewService } from './tree-view.service';
+import { TreeViewModel } from './tree-model';
 
 const actionMapping: IActionMapping = {
 };
@@ -11,30 +13,8 @@ const actionMapping: IActionMapping = {
   styleUrls: ['./tree-view.component.css']
 })
 export class TreeViewComponent implements OnInit {
-  nodes = [
-    {
-      id: 1,
-      name: 'root1',
-      children: [
-        { id: 2, name: 'child1' },
-        { id: 3, name: 'child2' }
-      ]
-    },
-    {
-      id: 4,
-      name: 'root2',
-      children: [
-        { id: 5, name: 'child2.1' },
-        {
-          id: 6,
-          name: 'child2.2',
-          children: [
-            { id: 7, name: 'subsub' }
-          ]
-        }
-      ]
-    }
-  ];
+  @Input() name: string;
+  nodes: TreeViewModel;
   options = {
     allowDrag: (node) => node.isLeaf,
     allowDrop: false,
@@ -44,9 +24,17 @@ export class TreeViewComponent implements OnInit {
       name: `copy of ${node.data.name}`
     }),
   };
-  constructor() { }
+  constructor(
+    private treeViewService: TreeViewService
+  ) { }
 
   ngOnInit() {
+    this.treeViewService.getTree(this.name).subscribe(data => {
+      console.log(data);
+      this.nodes = data;
+      console.log(this.nodes);
+      console.log(this.nodes.data.treeview.fileValue.tree);
+    });
   }
 
 }

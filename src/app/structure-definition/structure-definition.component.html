@@ -1,5 +1,15 @@
 <div class="card">
   <div class="card-body">
-    <tree-root [nodes]="nodes" [options]="options"></tree-root>
+    <tree-root [nodes]="nodes" [options]="options">
+      <ng-template #treeNodeTemplate let-node let-index="index">
+        <span>{{ node.data.name }}</span>
+        <input type="checkbox" value="search">Search
+        <input type="checkbox" value="result">Result
+        <select>
+          <option>String</option>
+          <option>Datetime</option>
+        </select>
+      </ng-template>
+    </tree-root>
   </div>
 </div>
