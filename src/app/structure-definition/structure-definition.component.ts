@@ -14,7 +14,9 @@ export class StructureDefinitionComponent implements OnInit {
       name: 'configuration',
     }
   ];
-  options = {
+  options: ITreeOptions = {
+    displayField: 'element',
+    childrenField: 'nodes',
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
     actionMapping: {
@@ -27,6 +29,9 @@ export class StructureDefinitionComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    setTimeout(() => {
+      console.log(this.nodes);
+    }, 5000);
   }
 
 }
