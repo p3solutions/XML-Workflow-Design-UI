@@ -29,6 +29,11 @@ export class FileUploadComponent implements OnInit {
     navBtn.classList.remove('hide-next');
     navBtn.classList.add('hide-ok');
     navBtn.classList.add('hide-prev');
+    const progressBar = document.getElementById('progress-bar');
+    progressBar.classList.add('width-33');
+    progressBar.classList.remove('width-66');
+    const navProgress = document.querySelectorAll('#navbarNav li.nav-item');
+    navProgress[1].classList.remove('active');
   }
   createForm() {
     this.fileUploadForm = this.formBuilder.group({

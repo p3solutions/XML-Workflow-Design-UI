@@ -35,3 +35,18 @@
   display: none;
 }
 
+/* progress-bar width css */
+.width-33 {
+  width: 33.33333333%;
+}
+.width-66 {
+  width: 66.66666666%;
+}
+.width-100 {
+  width: 99.99999999%;
+}
+
+/* overriding bootstrap css */
+.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+  color: rgba(255, 255, 255, 0.9);
+}
