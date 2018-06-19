@@ -22,6 +22,13 @@ export class FileUploadComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.handleNavigationBtn();
+  }
+  handleNavigationBtn() {
+    const navBtn = document.getElementById('nav-btn-container');
+    navBtn.classList.remove('hide-next');
+    navBtn.classList.add('hide-ok');
+    navBtn.classList.add('hide-prev');
   }
   createForm() {
     this.fileUploadForm = this.formBuilder.group({

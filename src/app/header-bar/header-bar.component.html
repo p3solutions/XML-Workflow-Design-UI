@@ -15,7 +15,7 @@
         <span class="navbar-brand work-flow">File/Schema Upload</span>
       </div>
       <div class="col-md-auto">
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="collapse navbar-collapse"   id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item active">
               <a class="nav-link" href="#">
@@ -41,5 +41,18 @@
       </div>
     </div>
   </div>
-
+  
+  <!-- navigation buttons -->
+    <div id="nav-btn-container" class="nav-btn-container hide-prev hide-ok">
+      <button class="nav-btn prev-btn" (click)="gotoPrev()">
+        <span class="glyphicon glyphicon-chevron-left"><</span>
+      </button>
+      <button class="nav-btn next-btn" (click)="gotoNext()">
+        <span class="glyphicon glyphicon-chevron-right">></span>
+      </button>
+      <button class="nav-btn ok-btn" (click)="gotoOK()">
+        <span class="glyphicon glyphicon-ok">OK</span>
+      </button>
+    </div>
+  <!-- End of navigation buttons -->
 </nav>

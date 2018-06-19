@@ -10,6 +10,14 @@ export class DefinitionStepComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.handleNavigationBtn();
   }
+  handleNavigationBtn() {
+    const navBtn = document.getElementById('nav-btn-container');
+    navBtn.classList.remove('hide-next');
+    navBtn.classList.remove('hide-prev');
+    navBtn.classList.add('hide-ok');
+  }
+
 
 }

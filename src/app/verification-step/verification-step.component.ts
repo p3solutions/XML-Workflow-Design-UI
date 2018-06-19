@@ -10,6 +10,13 @@ export class VerificationStepComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    this.handleNavigationBtn();
+  }
+  handleNavigationBtn() {
+    const navBtn = document.getElementById('nav-btn-container');
+    navBtn.classList.remove('hide-ok');
+    navBtn.classList.remove('hide-prev');
+    navBtn.classList.add('hide-next');
   }
 
 }
