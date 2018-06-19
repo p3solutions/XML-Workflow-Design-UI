@@ -7,6 +7,9 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InMemoryDataService } from './in-memory-data/in-memory-data.service';
 import { TreeModule } from 'angular-tree-component';
+import { MatButtonModule, MatCheckboxModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -37,12 +40,16 @@ import { FileUploadService } from './file-upload/file-upload.service';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     FileDropModule,
     DataTablesModule,
-    HttpClientModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    BrowserAnimationsModule,
     ReactiveFormsModule,
-    TreeModule
+    TreeModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )

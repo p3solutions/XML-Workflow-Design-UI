@@ -8,6 +8,8 @@ import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions }
   styleUrls: ['./structure-definition.component.css']
 })
 export class StructureDefinitionComponent implements OnInit {
+  isChecked = true;
+  isResult = true;
   nodes = [
     {
       id: 1,
@@ -30,8 +32,18 @@ export class StructureDefinitionComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      console.log(this.nodes);
-    }, 5000);
+      console.log(JSON.stringify(this.nodes));
+    }, 30000);
+  }
+
+  search(event: Event) {
+    console.log(event);
+  }
+  result(event: Event) {
+    console.log(event);
+  }
+  dataType(event: Event) {
+    console.log(event);
   }
 
 }

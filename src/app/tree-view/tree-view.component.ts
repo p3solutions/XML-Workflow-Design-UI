@@ -30,10 +30,7 @@ export class TreeViewComponent implements OnInit {
 
   ngOnInit() {
     this.treeViewService.getTree(this.name).subscribe(data => {
-      console.log(data);
       this.nodes = data;
-      console.log(this.nodes);
-      console.log(this.nodes.data.treeview.fileValue.tree);
     });
   }
 
