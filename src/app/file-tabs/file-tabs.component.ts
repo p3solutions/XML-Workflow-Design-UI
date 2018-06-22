@@ -6,10 +6,16 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./file-tabs.component.css']
 })
 export class FileTabsComponent implements OnInit {
-  fileList = ['File 1', 'File 2', 'File 3'];
+  fileList = [];
   constructor() { }
 
   ngOnInit() {
+    const files = localStorage.getItem('files');
+    const filesList = files.split(',');
+    filesList.forEach(file => {
+      const fileName = file.substring(file.lastIndexOf('/') + 1);
+      this.fileList.push(fileName);
+    });
   }
 
 }

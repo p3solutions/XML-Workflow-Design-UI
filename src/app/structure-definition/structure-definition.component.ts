@@ -10,30 +10,31 @@ import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions }
 export class StructureDefinitionComponent implements OnInit {
   isChecked = true;
   isResult = true;
-  nodes = [
-    {
-      id: 1,
-      name: 'configuration',
-    }
-  ];
+  nodes = [];
   options: ITreeOptions = {
-    displayField: 'element',
-    childrenField: 'nodes',
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
     actionMapping: {
       mouse: {
-        drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) =>
-          tree.copyNode(from, to)
+        drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
+          tree.copyNode(from, to);
+          console.log($event);
+          this.saveTree();
+        }
       }
     },
   };
   constructor() { }
 
   ngOnInit() {
-    setTimeout(() => {
-      console.log(JSON.stringify(this.nodes));
-    }, 30000);
+    const configuration = JSON.parse(localStorage.getItem('configuration'));
+    if (configuration != null) {
+      this.nodes = configuration;
+    }
+  }
+
+  saveTree() {
+    localStorage.setItem('configuration', JSON.stringify(this.nodes));
   }
 
   search(event: Event) {

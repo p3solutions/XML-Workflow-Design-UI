@@ -20,7 +20,7 @@ export class HeaderBarComponent implements OnInit {
   }
 
   gotoPrev() {
-    if (this.router.url === this.definitionUrl) {
+    if (this.router.url.startsWith(this.definitionUrl)) {
       // validateIsReadyToNavigate()
       this.router.navigate([this.fileUploadUrl]);
     } else if (this.router.url === this.verificationUrl) {
@@ -33,13 +33,15 @@ export class HeaderBarComponent implements OnInit {
     if (this.router.url === this.fileUploadUrl) {
       // validateIsReadyToNavigate()
       this.router.navigate([this.definitionUrl]);
-    } else if (this.router.url === this.definitionUrl) {
+    } else if (this.router.url.startsWith(this.definitionUrl)) {
       // validateIsReadyToNavigate()
       this.router.navigate([this.verificationUrl]);
     }
   }
 
   gotoOK() {
-    // validate / verify / submit / messageOnSubmit
+    localStorage.removeItem('files');
+    localStorage.removeItem('configuration');
+    this.router.navigate([this.fileUploadUrl]);
   }
 }
