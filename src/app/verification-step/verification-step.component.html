@@ -5,14 +5,7 @@
         Verify the files
       </div>
       <div class="card-body pre-scrollable">
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
-        <app-tree-view></app-tree-view>
+        <tree-root [nodes]="nodes ? nodes : null" [options]="options"></tree-root>
       </div>
     </div>
   </div>

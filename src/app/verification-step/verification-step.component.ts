@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ITreeOptions } from 'angular-tree-component';
 
 @Component({
   selector: 'app-verification-step',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./verification-step.component.css']
 })
 export class VerificationStepComponent implements OnInit {
-
+  nodes = [];
+  options: ITreeOptions = {
+    allowDrag: (node) => node.isLeaf,
+    allowDrop: true,
+  };
   constructor() { }
 
   ngOnInit() {
+    const configuration = JSON.parse(localStorage.getItem('configuration'));
+    if (configuration != null) {
+      this.nodes = configuration;
+    }
     this.handleNavigationBtn();
   }
   handleNavigationBtn() {

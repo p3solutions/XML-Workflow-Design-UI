@@ -10,6 +10,7 @@ import { TreeModule } from 'angular-tree-component';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 
 import { AppComponent } from './app.component';
@@ -50,6 +51,7 @@ import { FileUploadService } from './file-upload/file-upload.service';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     TreeModule,
+    AngularFontAwesomeModule
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )

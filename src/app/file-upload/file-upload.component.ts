@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadFile } from 'ngx-file-drop';
+import { UploadFile, UploadEvent } from 'ngx-file-drop';
 import { FileUploadService } from './file-upload.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { FileInfo, FileUpload } from '../file-info';
 
 @Component({
   selector: 'app-file-upload',
@@ -12,7 +13,10 @@ export class FileUploadComponent implements OnInit {
 
   public files: UploadFile[] = [];
   fileUploadForm: FormGroup;
-  fileToUpload: File;
+  fileToUpload: File[] = [];
+  fileUpload: FileUpload = new FileUpload();
+  fileInfoList: FileInfo[] = [];
+  dtOptions: DataTables.Settings = {};
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -23,6 +27,12 @@ export class FileUploadComponent implements OnInit {
 
   ngOnInit() {
     this.handleNavigationBtn();
+    this.dtOptions = {
+      language: {
+        emptyTable: '',
+        zeroRecords: '',
+      }
+    };
   }
   handleNavigationBtn() {
     const navBtn = document.getElementById('nav-btn-container');
@@ -32,8 +42,10 @@ export class FileUploadComponent implements OnInit {
     const progressBar = document.getElementById('progress-bar');
     progressBar.classList.add('width-33');
     progressBar.classList.remove('width-66');
+    progressBar.classList.remove('width-100');
     const navProgress = document.querySelectorAll('#navbarNav li.nav-item');
     navProgress[1].classList.remove('active');
+    navProgress[2].classList.remove('active');
   }
   createForm() {
     this.fileUploadForm = this.formBuilder.group({
@@ -42,13 +54,37 @@ export class FileUploadComponent implements OnInit {
   }
 
   onFileUpload(files: FileList) {
-    this.fileToUpload = files.item(0);
+    for (let index = 0; index < files.length; index++) {
+      this.fileToUpload.push(files.item(index));
+      const fileInfo: FileInfo = new FileInfo();
+      fileInfo.fileName = files.item(index).name;
+      fileInfo.size = files.item(index).size;
+      fileInfo.type = files.item(index).type;
+      fileInfo.status = 'Uploaded';
+      this.fileInfoList.push(fileInfo);
+    }
     this.fileUploadService.uploadFile(this.fileToUpload).subscribe(
       data => {
-        console.log(data);
+        this.fileUpload = data;
+        let file = '';
+        this.fileUpload.data.files.filesPath.forEach(filePath => {
+          file = file.concat(filePath.toString(), ',');
+        });
+        const prevFiles = localStorage.getItem('files');
+        if (prevFiles != null) {
+          file = file.concat(prevFiles, file);
+        }
+        localStorage.setItem('files', file);
       }
     );
   }
+
+  // onFileDropped(event: UploadEvent) {
+  //   this.files = event.files;
+  //   for (const file in event.files) {
+  //     if (file.fileEntry)
+  //   }
+  // }
 
   // public dropped(event: UploadEvent) {
   //   this.files = event.files;

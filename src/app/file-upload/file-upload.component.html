@@ -1,7 +1,7 @@
 <div class="center file-upload-box">
   <file-drop (onFileDrop)="dropped($event)" (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)" customstyle="custom-dropzone-style">
     <div class="drop-content col">
-      <div class="col-md-12 text-center">Drop files below</div>
+      <!-- <div class="col-md-12 text-center">Drop files below</div> -->
       <div class="file-upload-form">
         <form [formGroup]="fileUploadForm">
           <input type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)"
@@ -9,7 +9,7 @@
         </form>
       </div>
       <div class="upload-table">
-        <table datatable class="row-border hover">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover">
           <thead>
             <tr>
               <th>File Name</th>
@@ -18,9 +18,15 @@
             </tr>
           </thead>
           <tbody class="upload-name-style">
-            <tr *ngFor="let item of files; let i=index">
+            <tr *ngFor="let file of fileInfoList; let i=index">
               <td>
-                <strong>{{ item.relativePath }}</strong>
+                <strong>{{ file.fileName }}</strong>
+              </td>
+              <td>
+                {{ file.size }}
+              </td>
+              <td>
+                {{file.status}}
               </td>
             </tr>
           </tbody>

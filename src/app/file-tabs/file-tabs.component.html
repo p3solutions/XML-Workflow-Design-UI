@@ -2,7 +2,7 @@
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li *ngFor="let file of fileList; let i = index" class="nav-item">
-        <a class="nav-link" [routerLink]="['tree',name]">{{fileList[i]}}</a>
+        <a class="nav-link" [routerLink]="['tree',file]">{{file}}</a>
       </li>
     </ul>
   </div>

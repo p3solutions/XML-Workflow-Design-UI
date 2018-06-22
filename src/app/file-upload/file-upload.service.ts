@@ -8,14 +8,14 @@ import { FileInfo } from '../file-info';
   providedIn: 'root'
 })
 export class FileUploadService {
-  private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-  private fileUploadUrl = 'http://localhost:9000/api/upload/multi';
-  // environment.apiUrl + 'fileUpload';
+  // private headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+  private fileUploadUrl = environment.apiUrl + 'upload/multi';
   constructor(private http: HttpClient) { }
-  uploadFile(fileToUpload: File): Observable<any> {
+  uploadFile(fileToUpload: File[]): Observable<any> {
     const formData: FormData = new FormData();
-    formData.set('files', fileToUpload, fileToUpload.name);
-    console.log(formData);
+    fileToUpload.forEach(file => {
+      formData.append('files', file, file.name);
+    });
     return this.http.post(this.fileUploadUrl, formData);
   }
 }
