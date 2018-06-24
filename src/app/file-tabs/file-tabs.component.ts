@@ -10,7 +10,8 @@ export class FileTabsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const files = localStorage.getItem('files');
+    let files = localStorage.getItem('files');
+    files = files.substring(0, files.lastIndexOf(','));
     const filesList = files.split(',');
     filesList.forEach(file => {
       const fileName = file.substring(file.lastIndexOf('/') + 1);

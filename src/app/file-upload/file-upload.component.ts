@@ -17,6 +17,7 @@ export class FileUploadComponent implements OnInit {
   fileUpload: FileUpload = new FileUpload();
   fileInfoList: FileInfo[] = [];
   dtOptions: DataTables.Settings = {};
+  table = true;
 
   constructor(
     private fileUploadService: FileUploadService,
@@ -30,7 +31,7 @@ export class FileUploadComponent implements OnInit {
     this.dtOptions = {
       language: {
         emptyTable: '',
-        zeroRecords: '',
+        zeroRecords: ''
       }
     };
   }
@@ -62,6 +63,7 @@ export class FileUploadComponent implements OnInit {
       fileInfo.type = files.item(index).type;
       fileInfo.status = 'Uploaded';
       this.fileInfoList.push(fileInfo);
+      this.table = false;
     }
     this.fileUploadService.uploadFile(this.fileToUpload).subscribe(
       data => {

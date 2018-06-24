@@ -10,7 +10,10 @@ import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions }
 export class StructureDefinitionComponent implements OnInit {
   isChecked = true;
   isResult = true;
-  nodes = [];
+  nodes = [{
+    id: 1,
+    name: 'pagedata'
+  }];
   options: ITreeOptions = {
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
