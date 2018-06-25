@@ -19,11 +19,6 @@ export class TreeViewComponent implements OnInit, OnChanges {
   options = {
     allowDrag: true,
     allowDrop: false,
-    getNodeClone: (node) => ({
-      ...node.data,
-      id: v4(),
-      name: `copy of ${node.data.name}`
-    }),
   };
   constructor(
     private route: ActivatedRoute,
