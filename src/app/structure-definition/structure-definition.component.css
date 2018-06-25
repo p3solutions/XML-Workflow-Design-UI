@@ -1,0 +1,25 @@
+.tree-chkbx {
+    margin: 0 5px;
+    position: absolute;
+}
+.search-bx {
+    right: 150px;
+}
+.result-bx {
+    right: 100px;
+}
+.type-bx {
+    right: 1px;
+}
+.card-header-ht .tree-chkbx{
+    font-weight: bold;
+}
+.card-header-ht .search-bx {
+    right: 135px;
+}
+.card-header-ht .result-bx {
+    right: 80px;
+}
+.card-header-ht .type-bx {
+    right: 25px;
+}

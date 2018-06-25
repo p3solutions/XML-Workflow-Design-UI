@@ -1,4 +1,22 @@
-.scrollable-height {
-    height: 435px;
+.hori-scroll-menu {
     overflow: auto;
+    white-space: nowrap;
+    height: 50px;
+}
+.hori-scroll-menu a{
+    display: inline-block;
+    max-width: 200px;
+    padding: 2px 10px;
+    border: 1px solid #F7F7F7;
+}
+.hori-scroll-menu a:hover{
+    background-color: #fff;
+    border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    text-decoration: none;
+}
+a.hori-tab.active {
+    background-color: #fff;
+    border-radius: 5px;
+    border: 1px solid #d8d8d8;
 }

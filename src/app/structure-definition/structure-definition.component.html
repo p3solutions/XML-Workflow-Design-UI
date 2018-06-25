@@ -1,11 +1,23 @@
 <div class="card">
-  <div class="card-body">
+  <div class="card-header card-header-ht">
+    <div class="col-md-12">
+      <span class="tree-chkbx">Attribute</span>
+      <span class="search-bx tree-chkbx">Search</span>
+      <span class="result-bx tree-chkbx">Result</span>
+      <span class="type-bx tree-chkbx">Type</span>
+    </div>
+  </div>
+  <div class="card-body scrollable-height">
     <tree-root [nodes]="nodes ? nodes : null" [options]="options">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span>{{ node.data.name}}</span>
-        <input type="checkbox" [(ngModel)]="node.data.search">Search
-        <input type="checkbox" [(ngModel)]="node.data.result">Result
-        <select [(ngModel)]="node.data.datatype">
+        <span class="search-bx tree-chkbx">
+          <input type="checkbox" [(ngModel)]="node.data.search">
+        </span>
+        <span class="result-bx tree-chkbx">
+          <input type="checkbox" [(ngModel)]="node.data.result">
+        </span>
+        <select [(ngModel)]="node.data.datatype" class="type-bx tree-chkbx">
           <option value="string">String</option>
           <option value="time">Time</option>
           <option value="byte">Byte</option>

@@ -8455,3 +8455,23 @@ a.text-dark:hover, a.text-dark:focus {
 .m-20 {
   margin: 20px;
 }
+.p-0 {
+  padding: 0;
+}
+.p-t-0 {
+  padding-top: 0!important;
+}
+.trim-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.scrollable-height {
+  max-height: 435px;
+  overflow: auto;
+}
+.card-header-ht {
+  height: 55px;
+  padding: 0.5rem 0.75rem;
+}
