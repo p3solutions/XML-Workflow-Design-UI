@@ -77,7 +77,6 @@ export class FileUploadComponent implements OnInit {
           file = file.concat(prevFiles, file);
         }
         localStorage.setItem('files', file);
-        console.log(this.fileUpload);
       }
     );
   }
