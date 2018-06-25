@@ -33,4 +33,20 @@ export class VerificationStepComponent implements OnInit {
     navProgress[2].classList.add('active');
   }
 
+  downloadFile() {
+    const dataStr = localStorage.getItem('configuration');
+    if (!dataStr || dataStr.length === 0) {
+      console.log('Error! Can\'t find parsed data.' );
+      return false;
+    }
+    const filename = 'output_workflow_file.json';
+    const blob = new Blob([dataStr], {type: 'text/json'});
+    const e = document.createEvent('MouseEvents');
+    const a = document.createElement('a');
+    a.download = filename;
+    a.href = window.URL.createObjectURL(blob);
+    a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+    e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    a.dispatchEvent(e);
+  }
 }
