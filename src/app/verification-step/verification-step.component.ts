@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ITreeOptions } from 'angular-tree-component';
-import * as _ from 'lodash';
 
 @Component({
   selector: 'app-verification-step',
@@ -13,6 +12,7 @@ export class VerificationStepComponent implements OnInit {
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
   };
+  loader = false;
   constructor() { }
 
   ngOnInit() {
@@ -35,12 +35,14 @@ export class VerificationStepComponent implements OnInit {
   }
 
   downloadFile() {
+    this.loader = true;
     const dataStr = localStorage.getItem('configuration');
     if (!dataStr || dataStr.length === 0) {
       console.log('Error! Can\'t find parsed data.' );
+      this.loader = false;
       return false;
     }
-    const dataArray = this.transformToTree(JSON.parse(dataStr));
+    const dataArray = JSON.parse(dataStr);
     const fileObj = {'result': dataArray[0]};
     const jsonTree = JSON.stringify(fileObj, null, 2);
     const filename = 'output_workflow_file.json';
@@ -52,20 +54,6 @@ export class VerificationStepComponent implements OnInit {
     a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(e);
-  }
-
-  transformToTree(arr) {
-    const nodes = {};
-    return arr.filter(function(obj) {
-        const id = obj['name'];
-        const  parentId = obj['parent'];
-        nodes[id] = _.defaults(obj, nodes[id], { children: [] });
-        if (parentId) {
-          nodes[parentId] = (nodes[parentId] || { children: [] });
-          const childArr = nodes[parentId]['children'];
-          childArr.push(obj);
-        }
-        return !parentId;
-    });
+    this.loader = false;
   }
 }
