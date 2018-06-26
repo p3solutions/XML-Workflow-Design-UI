@@ -8446,6 +8446,9 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=styles.css.map */
+.hide {
+  display: none;
+}
 .m-t-0 {
   margin-top: 0;
 }
@@ -8483,4 +8486,16 @@ a.text-dark:hover, a.text-dark:focus {
 }
 .output-text {
   border-radius: 0.25rem;
+}
+.undo-remove-bx {
+  margin: 0 5px;
+  font-size: 13px;
+  left: 0;
+  position: absolute;
+  color: rgb(166,166,166);
+}
+.undo-remove-bx:hover {
+  margin-top: -8px;
+  font-size: 20px;
+  color: #007bff;
 }

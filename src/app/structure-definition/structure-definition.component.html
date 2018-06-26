@@ -8,9 +8,12 @@
     </div>
   </div>
   <div class="card-body scrollable-height">
-    <tree-root [nodes]="nodes ? nodes : null" [options]="options">
+    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span>{{ node.data.name}}</span>
+        <span *ngIf="node?.id !== 1" class="remove-bx" (click)="removeNode($event, node, tree)">
+          <fa name="remove"></fa>
+        </span>
         <span class="search-bx tree-chkbx">
           <input type="checkbox" [(ngModel)]="node.data.search">
         </span>
@@ -29,3 +32,5 @@
     </tree-root>
   </div>
 </div>
+<a id="update-save-tree" (click)="deleteThenSave()" class="hide"></a>
+<a id="undo-last" (click)="undoLastRemoveNode()" class="hide"></a>

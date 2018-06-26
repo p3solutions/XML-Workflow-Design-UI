@@ -11,7 +11,7 @@ export class StructureDefinitionComponent implements OnInit {
   isChecked = true;
   isResult = true;
   nodes = [{
-    id: 1,
+    id: 1, // pagedata node delete option is hidden on this id basis, changing this will display the delete icon
     name: 'pagedata'
   }];
   options: ITreeOptions = {
@@ -27,6 +27,7 @@ export class StructureDefinitionComponent implements OnInit {
       }
     },
   };
+  deleteNode: any = {};
   constructor() { }
 
   ngOnInit() {
@@ -50,4 +51,45 @@ export class StructureDefinitionComponent implements OnInit {
     console.log(event);
   }
 
+  removeNode(_event, node, tree) {
+    const target = $(_event.target);
+    // expanding | collapsing parent node regenerates the temporary deleted node
+    // which can be deleted permanently on next any delete btn click
+    if ($('#undo-btn').length > 0) { // delete previous hidden node only if undo btn is available
+      this.deleteThenSave(); // there may be previously (hidden div) temporary-deleted nodes, delete them permanently
+    }
+    this.deleteNode.targetNode = target.parents('tree-node')[0];
+    this.deleteNode.targetNodeWrapper = target.parents('tree-node-wrapper');
+    const undoHtml = `<span id="undo-btn" class="undo-remove-bx" onclick="document.getElementById('undo-last').click()">
+                        <i class="fa fa-refresh"></i>
+                      </span>`;
+    $(undoHtml).insertAfter(this.deleteNode.targetNodeWrapper.parent());
+    this.deleteNode.targetNodeWrapper.parent().slideUp();
+    this.deleteNode.node = node;
+    this.deleteNode.parentNode = node.realParent ? node.realParent : node.treeModel.virtualRoot;
+    this.deleteNode.tree = tree;
+  }
+  undoLastRemoveNode() {
+    $('#undo-btn').remove();
+    this.deleteNode.targetNodeWrapper.parent().slideDown();
+    this.deleteNode = {};
+    this.saveTree();
+  }
+  deleteThenSave() {
+    if (this.deleteNode.targetNode) {
+      let index = 0;
+      const children = this.deleteNode.parentNode.data.children;
+      children.some((child, i) => {
+        index = i;
+        return child === this.deleteNode.node.data;
+      });
+      children.splice(index, 1);
+      this.deleteNode.tree.treeModel.update();
+      if (this.deleteNode.node.parent.data.children.length === 0) {
+          this.deleteNode.node.parent.data.hasChildren = false;
+      }
+      this.deleteNode.targetNode.remove();
+      this.saveTree();
+    }
+  }
 }
