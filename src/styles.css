@@ -8446,6 +8446,9 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 /*# sourceMappingURL=styles.css.map */
+.m-t-0 {
+  margin-top: 0;
+}
 .m-l-20 {
   margin-left: 20px;
 }
@@ -8454,6 +8457,9 @@ a.text-dark:hover, a.text-dark:focus {
 }
 .m-20 {
   margin: 20px;
+}
+.m-0-20 {
+  margin: 0 20px;
 }
 .p-0 {
   padding: 0;
@@ -8474,4 +8480,7 @@ a.text-dark:hover, a.text-dark:focus {
 .card-header-ht {
   height: 55px;
   padding: 0.5rem 0.75rem;
+}
+.output-text {
+  border-radius: 0.25rem;
 }
