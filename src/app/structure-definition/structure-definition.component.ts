@@ -61,7 +61,7 @@ export class StructureDefinitionComponent implements OnInit {
     this.deleteNode.targetNode = target.parents('tree-node')[0];
     this.deleteNode.targetNodeWrapper = target.parents('tree-node-wrapper');
     const undoHtml = `<span id="undo-btn" class="undo-remove-bx" onclick="document.getElementById('undo-last').click()">
-                        <i class="fa fa-refresh"></i>
+                        <i class="fa fa-undo"></i>
                       </span>`;
     $(undoHtml).insertAfter(this.deleteNode.targetNodeWrapper.parent());
     this.deleteNode.targetNodeWrapper.parent().slideUp();
