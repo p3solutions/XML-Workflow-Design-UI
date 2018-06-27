@@ -14,7 +14,7 @@ function createWindow() {
     icon: path.join('file://', __dirname, 'dist/cfw-workflow-design/favicon.ico')
   })
   window.loadURL(path.join('file://', __dirname, 'dist/cfw-workflow-design/index.html'))
-
+  window.maximize();
 //   window.webContents.openDevTools()
 
   window.on('closed', function () {
