@@ -17,7 +17,7 @@ export class StructureDefinitionComponent implements OnInit {
   options: ITreeOptions = {
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
-    useCheckbox: true,
+    // useCheckbox: true,
     actionMapping: {
       mouse: {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
@@ -52,32 +52,17 @@ export class StructureDefinitionComponent implements OnInit {
     console.log(event);
   }
 
-  removeNode(_event, node, tree) {
+  confirmDelete(_event, node, tree) {
     const target = $(_event.target);
-    // expanding | collapsing parent node regenerates the temporary deleted node
-    // which can be deleted permanently on next any delete btn click
-    if ($('#undo-btn').length > 0) { // delete previous hidden node only if undo btn is available
-      this.deleteThenSave(); // there may be previously (hidden div) temporary-deleted nodes, delete them permanently
-    }
     this.deleteNode.targetNode = target.parents('tree-node')[0];
     this.deleteNode.targetNodeWrapper = target.parents('tree-node-wrapper');
-    const undoHtml = `<span id="undo-btn" class="undo-remove-bx" onclick="document.getElementById('undo-last').click()">
-                        <i class="fa fa-undo"></i>
-                      </span>`;
-    $(undoHtml).insertAfter(this.deleteNode.targetNodeWrapper.parent());
-    this.deleteNode.targetNodeWrapper.parent().slideUp();
     this.deleteNode.node = node;
     this.deleteNode.parentNode = node.realParent ? node.realParent : node.treeModel.virtualRoot;
     this.deleteNode.tree = tree;
-  }
-  undoLastRemoveNode() {
-    $('#undo-btn').remove();
-    this.deleteNode.targetNodeWrapper.parent().slideDown();
-    this.deleteNode = {};
-    this.saveTree();
+    document.getElementById('confirm-delete').click();
   }
   deleteThenSave() {
-    if (this.deleteNode.targetNode) {
+    if (this.deleteNode.node) {
       let index = 0;
       const children = this.deleteNode.parentNode.data.children;
       children.some((child, i) => {
@@ -87,10 +72,19 @@ export class StructureDefinitionComponent implements OnInit {
       children.splice(index, 1);
       this.deleteNode.tree.treeModel.update();
       if (this.deleteNode.node.parent.data.children.length === 0) {
-          this.deleteNode.node.parent.data.hasChildren = false;
+        this.deleteNode.node.parent.data.hasChildren = false;
       }
+      this.deleteNode.targetNodeWrapper.parent().slideUp();
       this.deleteNode.targetNode.remove();
+      this.deleteNode = {};
       this.saveTree();
     }
   }
+  // selectionForDelete(node, _event) {
+  //   if ($(_event.target).is (':checked')) {
+  //     node.delete = true;
+  //   } else {
+  //     node.delete = false;
+  //   }
+  // }
 }

@@ -35,8 +35,6 @@ export class HeaderBarComponent implements OnInit {
       this.router.navigate([this.definitionUrl]);
     } else if (this.router.url.startsWith(this.definitionUrl)) {
       // validateIsReadyToNavigate()
-      // update | save the tree structure before navigating
-      document.getElementById('update-save-tree').click();
       this.router.navigate([this.verificationUrl]);
     }
   }

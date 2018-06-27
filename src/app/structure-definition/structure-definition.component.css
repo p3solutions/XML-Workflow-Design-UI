@@ -32,16 +32,25 @@
 .delete-bx:hover {
     color: #dc3545;
     cursor: pointer;
-    font-size: 20px;
-    margin-top: -3px;
+    /* font-size: 20px; */
+    /* margin-top: -3px; */
 }
 .delete-bx {
     right: 3px;
 }
-/* .config-text .popover {
+.config-text {
+    position: relative;
+    padding:2px 5px
+}
+.config-text .popover {
     display: none;
+    left: 99.5%;
+    top: -5px;
+    width: 270px;
 }
 .config-text:hover>.popover {
     display: block;
 }
-*/
+.popover-body {
+    padding: 0.2rem 0.75rem;
+}
