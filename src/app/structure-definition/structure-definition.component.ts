@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { v4 } from 'uuid';
 import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import * as $ from 'jquery/dist/jquery.slim';
 
 @Component({
   selector: 'app-structure-definition',
