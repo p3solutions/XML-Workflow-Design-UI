@@ -92,3 +92,64 @@ div.tree>tree-node>div::before {
 div.tree>tree-node>div>.node-wrapper>tree-node-expander>.toggle-children-wrapper {
   left: 22px
 }
+
+/* delete feature css */
+.hide {
+  display: none;
+}
+.m-t-0 {
+  margin-top: 0;
+}
+.m-l-20 {
+  margin-left: 20px;
+}
+.m-r-20 {
+  margin-right: 20px;
+}
+.m-20 {
+  margin: 20px;
+}
+.m-0-20 {
+  margin: 0 20px;
+}
+.p-0 {
+  padding: 0;
+}
+.p-t-0 {
+  padding-top: 0!important;
+}
+.trim-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.scrollable-height {
+  height: 435px;
+  overflow: auto;
+}
+.card-header-ht {
+  height: 55px;
+  padding: 1rem 0.75rem;
+}
+.output-text {
+  border-radius: 0.25rem;
+}
+.undo-remove-bx {
+  margin: 0 5px;
+  font-size: 13px;
+  left: 0;
+  position: absolute;
+  color: rgb(166,166,166);
+}
+.undo-remove-bx:hover {
+  margin-top: -8px;
+  font-size: 20px;
+  color: #007bff;
+}
+.trim-text {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

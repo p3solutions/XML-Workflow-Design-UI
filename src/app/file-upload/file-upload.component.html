@@ -4,33 +4,60 @@
     <!-- <div class="col-md-12 text-center">Drop files below</div> -->
     <div class="file-upload-form">
       <form [formGroup]="fileUploadForm">
-        <input type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)"
-          class="btn btn-secondary browse-btn">
+        <button type="button" class="btn btn-secondary browse-btn" onclick="document.getElementById('upload-btn').click()">Upload files</button>
+        <input id="upload-btn" type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)"
+          class="hide btn btn-secondary browse-btn">
       </form>
     </div>
-    <div [hidden]="table" class="upload-table">
-      <table class="table">
-        <thead class="bg-dark text-white">
-          <tr>
-            <th scope="col">File Name</th>
-            <th scope="col">Size</th>
-            <th scope="col">File Uploaded Status</th>
-          </tr>
-        </thead>
-        <tbody class="upload-name-style">
-          <tr *ngFor="let file of fileInfoList; let i=index">
-            <td scope="row">
-              <strong>{{ file.fileName }}</strong>
-            </td>
-            <td scope="row">
-              {{ file.size }}
-            </td>
-            <td scope="row">
-              {{file.status}}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="row">
+      <div class="col-md-2" *ngIf="prevFileList.length > 0">
+        <table class="table table-bordered table-scrollable">
+          <thead class="bg-dark text-white">
+            <tr class="text-center">
+              <th scope="col">Recent uploads {{prevFileList.length}}</th>
+            </tr>
+          </thead>
+          <tbody class="upload-name-style">
+            <tr *ngFor="let file of prevFileList; let i=index">
+              <td scope="row" title="{{file}}" class="trim-text td-file-name">
+                <strong>{{file}}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="upload-table {{(prevFileList.length > 0)? 'col-md-10' : 'col-md-12'}}">
+        <table class="table table-bordered">
+          <thead class="bg-dark text-white">
+            <tr class="text-center">
+              <th scope="col">File Name</th>
+              <th scope="col" >Size (KB)</th>
+              <th scope="col" >File Uploaded Status</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="fileInfoList.length > 0" class="upload-name-style">
+            <tr *ngFor="let file of fileInfoList; let i=index">
+              <td scope="row">
+                <strong>{{ file.fileName }}</strong>
+              </td>
+              <td scope="row" class="text-center">
+                {{ (file.size)/1024 | number}}
+              </td>
+              <td scope="row" class="text-center">
+                {{file.status}}
+              </td>
+            </tr>
+          </tbody>
+          <tbody *ngIf="fileInfoList.length === 0" >
+            <tr >
+              <td colspan="3" class="text-center">
+                  No Data Available
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
     </div>
   </div>
   <!-- </file-drop> -->

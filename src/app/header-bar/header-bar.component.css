@@ -3,7 +3,7 @@
 }
 
 .work-flow {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 500;
 }
 .nav-btn-container {
@@ -47,6 +47,6 @@
 }
 
 /* overriding bootstrap css */
-.navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
+/* .navbar-light .navbar-nav .show > .nav-link, .navbar-light .navbar-nav .active > .nav-link, .navbar-light .navbar-nav .nav-link.show, .navbar-light .navbar-nav .nav-link.active {
   color: rgba(255, 255, 255, 0.9);
-}
+} */

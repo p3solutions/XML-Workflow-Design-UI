@@ -17,6 +17,7 @@ export class StructureDefinitionComponent implements OnInit {
   options: ITreeOptions = {
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
+    useCheckbox: true,
     actionMapping: {
       mouse: {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {

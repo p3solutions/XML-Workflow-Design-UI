@@ -20,23 +20,25 @@ export class TreeViewComponent implements OnInit, OnChanges {
     allowDrag: true,
     allowDrop: false,
   };
+  tree: any;
   constructor(
     private route: ActivatedRoute,
     private treeViewService: TreeViewService
   ) { }
 
   ngOnInit() {
+    this.expandRoot();
     this.getData();
   }
 
   getData() {
-    const tree = this.route.paramMap.pipe(
+    this.tree = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         console.log(params.get('name'));
         return this.treeViewService.getTree(params.get('name'));
       })
     );
-    tree.subscribe(data => {
+    this.tree.subscribe(data => {
       console.log(data);
       this.nodes = data;
       console.log(this.nodes.data.treeview);
@@ -49,5 +51,9 @@ export class TreeViewComponent implements OnInit, OnChanges {
         console.log(changes[propName].currentValue);
       }
     }
+  }
+  expandRoot() {
+    // const someNode = this.tree.treeModel.getNodeById('1');
+    // someNode.expand();
   }
 }
