@@ -38,22 +38,23 @@ export class VerificationStepComponent implements OnInit {
     this.loader = true;
     const dataStr = localStorage.getItem('configuration');
     if (!dataStr || dataStr.length === 0) {
-      console.log('Error! Can\'t find parsed data.' );
+      console.log('Error! Can\'t find parsed data.');
       this.loader = false;
       return false;
     }
     const dataArray = JSON.parse(dataStr);
-    const fileObj = {'result': dataArray[0]};
+    const fileObj = { 'result': dataArray[0] };
     const jsonTree = JSON.stringify(fileObj, null, 2);
     const filename = 'output_workflow_file.json';
-    const blob = new Blob([jsonTree], {type: 'text/json'});
+    const blob = new Blob([jsonTree], { type: 'text/json' });
     const e = document.createEvent('MouseEvents');
     const a = document.createElement('a');
     a.download = filename;
     a.href = window.URL.createObjectURL(blob);
-    a.dataset.downloadurl =  ['text/json', a.download, a.href].join(':');
+    a.dataset.downloadurl = ['text/json', a.download, a.href].join(':');
     e.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
     a.dispatchEvent(e);
     this.loader = false;
   }
+
 }
