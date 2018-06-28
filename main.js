@@ -4,6 +4,8 @@ const {
 } = require('electron');
 const path = require('path')
 
+if (process.mas) app.setName('XML Workflow Design')
+
 let window;
 
 function createWindow() {
@@ -11,11 +13,14 @@ function createWindow() {
     width: 600,
     height: 600,
     backgroundColor: '#ffffff',
-    icon: path.join('file://', __dirname, 'dist/cfw-workflow-design/favicon.ico')
+    title: app.getName(),
   })
-  window.loadURL(path.join('file://', __dirname, 'dist/cfw-workflow-design/index.html'))
+  if (process.platform === 'darwin') {
+    window.icon = path.join(__dirname, 'dist/xml-workflow-design/assets/brand/suite.icns')
+  }
+  window.loadURL(path.join('file://', __dirname, 'dist/xml-workflow-design/index.html'))
   window.maximize();
-//   window.webContents.openDevTools()
+  //   window.webContents.openDevTools()
 
   window.on('closed', function () {
     window = null;
