@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { v4 } from 'uuid';
 import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
-import * as $ from 'jquery/dist/jquery.slim';
 
 @Component({
   selector: 'app-structure-definition',
@@ -24,9 +23,16 @@ export class StructureDefinitionComponent implements OnInit {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
           tree.copyNode(from, to);
           console.log($event);
+          // setTimeout(this.colorRHStree, 10);
           this.saveTree();
+        },
+        dblClick: (tree, node, $event) => {
+          if (node.hasChildren) {
+            TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+            // this.colorRHStree();
+          }
         }
-      }
+      },
     },
   };
   deleteNode: any = {};
@@ -87,5 +93,14 @@ export class StructureDefinitionComponent implements OnInit {
   //   } else {
   //     node.delete = false;
   //   }
+  // }
+  // colorRHStree() {
+  //   $('.rhs-tree .node-wrapper ').each((i, el) => {
+  //     let color = '#ffffff';
+  //     if (i % 2 === 0) {
+  //             color = '#dfdfdf';
+  //         }
+  //     $(el).css('background', color);
+  //   });
   // }
 }
