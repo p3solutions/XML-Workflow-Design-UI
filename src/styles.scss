@@ -4,3 +4,61 @@ $body-bg: #FAFAFA;
 
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import '../node_modules/angular-tree-component/dist/angular-tree-component.css';
+
+@font-face {
+    font-family: robotoFont;
+    src: url(./assets/fonts/Roboto-Regular.ttf);
+}
+body {
+    font-family: robotoFont;
+    font-size: 17px;
+}
+/* adding rhs ng-compo-tree css */
+
+.rhs-tree{
+    .toggle-children-wrapper {
+        padding: 2px 1px 5px 0px;
+    }
+    .node-content-wrapper, .tree-children {
+        position: relative;
+    }
+    
+    .node-content-wrapper::before, .tree-children::after {
+        content: "";
+        position: absolute;
+    }
+    
+    .node-content-wrapper::before {
+        border-bottom: 1px dotted lightgrey;
+        border-left: 1px dotted lightgrey;
+        height: 28px;
+        top: -17px;
+        width: 20px;
+        left: -28px;
+    }
+    
+    .tree-node-level-1 > tree-node-wrapper > .node-wrapper > .node-content-wrapper::before {
+        display: none;
+    }
+    
+    .tree-node-leaf > .node-wrapper > .node-content-wrapper::before {
+        width: 25px;
+    }
+    
+    .tree-children::after {
+        border-left: 1px dotted lightgrey;
+        height: 100%;
+        top: -15px;
+        left: -15px;
+    }
+    .toggle-children {
+        z-index: 1;
+    }
+    
+    tree-node:last-child > .tree-node > .tree-children::after {
+        border-left: none;
+        border-left: 1px dotted lightgrey;
+    }
+    
+}  
+

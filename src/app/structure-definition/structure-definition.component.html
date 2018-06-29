@@ -5,8 +5,8 @@
 
     </div>
   </div>
-  <div class="card-body scrollable-height">
-    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options">
+  <div class="card-body scrollable-height rhs-tree">
+    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span class="config-text">
           <span tabindex="0" role="button" data-container="body" data-trigger="focus hover" data-toggle="popover" data-placement="right"
