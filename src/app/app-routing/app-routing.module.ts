@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'definition', component: DefinitionStepComponent, children: [
           {
             path: 'tree/:name', component: TreeViewComponent
-          }
+          },
         ]
       },
       {

@@ -1,4 +1,4 @@
-<div class="card text-black">
+<!-- <div class="card text-black">
   <div class="card-header">
     <ul class="nav nav-tabs card-header-tabs">
       <li *ngFor="let file of fileList; let i = index" class="nav-item">
@@ -6,7 +6,19 @@
       </li>
     </ul>
   </div>
-  <div class="card-body">
+  <div class="card-body scrollable-height">
+    <router-outlet></router-outlet>
+  </div>
+</div> -->
+
+<div class="card text-black">
+  <div class="card-header card-header-ht">
+    <div class="hori-scroll-menu">
+        <a *ngFor="let file of fileList; let i = index"  class="trim-text hori-tab" (click)="activeTab($event)"
+         [routerLink]="['tree',file]" title="{{file}}">{{file}}</a>
+    </div>
+  </div>
+  <div class="card-body scrollable-height">
     <router-outlet></router-outlet>
   </div>
 </div>

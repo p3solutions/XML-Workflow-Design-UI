@@ -2,7 +2,7 @@
 <nav class="navbar navbar-dark bg-dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">
-      <img src="/assets/brand/favicon-96x96.png" width="30" height="30" class="d-inline-block align-top" alt=""> Archon
+      <img src="assets/brand/favicon-96x96.png" width="30" height="30" class="d-inline-block align-top" alt=""> Archon
     </a>
   </div>
 </nav>
@@ -10,9 +10,9 @@
   <div class="col-md-12">
     <div class="row justify-content-between">
       <div class="col-2">
-        <span class="navbar-brand header">
-          CFW Workflow Design</span>
-        <span class="navbar-brand work-flow">File/Schema Upload</span>
+        <!-- <span class="navbar-brand header">
+           CFW Workflow Design</span> -->
+        <span class="navbar-brand work-flow" style="margin:20px 5px">File/Schema Upload</span>
       </div>
       <div class="col-md-9">
         <div class="collapse navbar-collapse" id="navbarNav">
@@ -45,13 +45,13 @@
   <!-- navigation buttons -->
   <div id="nav-btn-container" class="nav-btn-container hide-prev hide-ok">
     <button class="nav-btn prev-btn" (click)="gotoPrev()">
-      <fa name="chevron-circle-left"></fa>
+      <fa name="chevron-left fa-lg"></fa>
     </button>
     <button class="nav-btn next-btn" (click)="gotoNext()">
-      <fa name="chevron-circle-right"></fa>
+      <fa name="chevron-right fa-lg"></fa>
     </button>
     <button class="nav-btn ok-btn" (click)="gotoOK()">
-      <fa name="check-circle"></fa>
+      <fa name="check fa-lg"></fa>
     </button>
   </div>
   <!-- End of navigation buttons -->

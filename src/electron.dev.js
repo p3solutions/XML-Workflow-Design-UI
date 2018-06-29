@@ -2,20 +2,28 @@ const {
   app,
   BrowserWindow
 } = require('electron');
-const path = require('path')
+const path = require('path');
+const url = require('url');
+
+if (process.mas) app.setName('XML Workflow Design')
 
 let window;
 
 function createWindow() {
   window = new BrowserWindow({
-    width: 600,
-    height: 600,
     backgroundColor: '#ffffff',
-    icon: path.join('file://', __dirname, 'dist/cfw-workflow-design/favicon.ico')
+    title: app.getName(),
+    icon: 'favicon.ico'
   })
-  window.loadURL(path.join('file://', __dirname, 'dist/cfw-workflow-design/index.html'))
-
-//   window.webContents.openDevTools()
+  window.loadURL(url.format({
+    pathname: path.join(__dirname, '../dist/xml-workflow-design/index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
+  window.maximize();
+  window.isMinimizable(false);
+  
+  window.webContents.openDevTools();
 
   window.on('closed', function () {
     window = null;

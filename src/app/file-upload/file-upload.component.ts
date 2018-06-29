@@ -18,7 +18,8 @@ export class FileUploadComponent implements OnInit {
   fileInfoList: FileInfo[] = [];
   dtOptions: DataTables.Settings = {};
   table = true;
-
+  prevFiles: any;
+  prevFileList = [];
   constructor(
     private fileUploadService: FileUploadService,
     private formBuilder: FormBuilder
@@ -34,6 +35,7 @@ export class FileUploadComponent implements OnInit {
         zeroRecords: ''
       }
     };
+    this.showPrevFilesInTable();
   }
   handleNavigationBtn() {
     const navBtn = document.getElementById('nav-btn-container');
@@ -72,15 +74,25 @@ export class FileUploadComponent implements OnInit {
         this.fileUpload.data.files.filesPath.forEach(filePath => {
           file = file.concat(filePath.toString(), ',');
         });
-        const prevFiles = localStorage.getItem('files');
-        if (prevFiles != null) {
-          file = file.concat(prevFiles, file);
+        // this.prevFiles = localStorage.getItem('files');
+        if (this.prevFiles !== null) {
+          file = file.concat(this.prevFiles, file);
         }
         localStorage.setItem('files', file);
       }
     );
   }
 
+  showPrevFilesInTable() {
+    this.prevFiles = localStorage.getItem('files');
+    if (this.prevFiles !== null) {
+      const files = this.prevFiles.substring(0, this.prevFiles.lastIndexOf(','));
+      files.split(',').forEach(file => {
+        const fileName = file.substring(file.lastIndexOf('/') + 1);
+        this.prevFileList.push(fileName);
+      });
+    }
+  }
   // onFileDropped(event: UploadEvent) {
   //   this.files = event.files;
   //   for (const file in event.files) {

@@ -11,22 +11,31 @@ export class StructureDefinitionComponent implements OnInit {
   isChecked = true;
   isResult = true;
   nodes = [{
-    id: 1,
+    id: 1, // pagedata node delete option is hidden on this id basis, changing this will display the delete icon
     name: 'pagedata'
   }];
   options: ITreeOptions = {
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
+    // useCheckbox: true,
     actionMapping: {
       mouse: {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
           tree.copyNode(from, to);
           console.log($event);
+          setTimeout(this.colorRHStree, 10);
           this.saveTree();
+        },
+        dblClick: (tree, node, $event) => {
+          if (node.hasChildren) {
+            TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+            this.colorRHStree();
+          }
         }
-      }
+      },
     },
   };
+  deleteNode: any = {};
   constructor() { }
 
   ngOnInit() {
@@ -50,4 +59,53 @@ export class StructureDefinitionComponent implements OnInit {
     console.log(event);
   }
 
+  confirmDelete(_event, node, tree) {
+    const target = $(_event.target);
+    this.deleteNode.targetNode = target.parents('tree-node')[0];
+    this.deleteNode.targetNodeWrapper = target.parents('tree-node-wrapper');
+    this.deleteNode.node = node;
+    this.deleteNode.parentNode = node.realParent ? node.realParent : node.treeModel.virtualRoot;
+    this.deleteNode.tree = tree;
+    document.getElementById('confirm-delete').click();
+  }
+  deleteThenSave() {
+    if (this.deleteNode.node) {
+      let index = 0;
+      const children = this.deleteNode.parentNode.data.children;
+      children.some((child, i) => {
+        index = i;
+        return child === this.deleteNode.node.data;
+      });
+      children.splice(index, 1);
+      this.deleteNode.tree.treeModel.update();
+      if (this.deleteNode.node.parent.data.children.length === 0) {
+        this.deleteNode.node.parent.data.hasChildren = false;
+      }
+      this.deleteNode.targetNodeWrapper.parent().slideUp();
+      this.deleteNode.targetNode.remove();
+      this.deleteNode = {};
+      this.saveTree();
+      this.colorRHStree();
+    }
+  }
+  // selectionForDelete(node, _event) {
+  //   if ($(_event.target).is (':checked')) {
+  //     node.delete = true;
+  //   } else {
+  //     node.delete = false;
+  //   }
+  // }
+  colorRHStree() {
+    $('.node-wrapper ').each((i, el) => {
+      let color = '#F7F7F7';
+      if (i % 2 === 0) {
+              color = '#ffffff';
+          }
+      $(el).css({'background': color, 'border': '1px solid F7F7F7'});
+    });
+  }
+  onToggle(_event) {
+    console.log('toggle');
+    setTimeout(this.colorRHStree, 10);
+  }
 }

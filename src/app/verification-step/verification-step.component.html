@@ -2,7 +2,7 @@
   <div class="col-md-10">
     <div class="card">
       <div class="card-header">
-        Verify the files
+        Final structure to be generated:
       </div>
       <div class="card-body pre-scrollable">
         <tree-root [nodes]="nodes ? nodes : null" [options]="options"></tree-root>
@@ -10,7 +10,9 @@
     </div>
   </div>
   <div class="col-md-2">
-    <button type="button" class="btn btn-secondary submit-btn m-20">Generate PDI Metadata</button>
-    <button type="button" class="btn btn-secondary submit-btn m-20">Generate WorkFlow File</button>
+    <button type="button" class="btn btn-secondary submit-btn m-20" style="display: none;">Generate PDI Metadata</button>
+    <button type="button" class="btn btn-secondary submit-btn m-0-20" (click)="downloadFile()">Generate WorkFlow
+      <fa *ngIf="loader" name="spinner fa-spin"></fa>
+    </button>
   </div>
 </div>

@@ -1,19 +1,51 @@
 <div class="card">
-  <div class="card-body">
-    <tree-root [nodes]="nodes ? nodes : null" [options]="options">
+  <div class="card-header card-header-ht">
+    <div class="col-md-12">
+      <span class="tree-chkbx">Configuration</span>
+
+    </div>
+  </div>
+  <div class="card-body scrollable-height rhs-tree">
+    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
-        <span>{{ node.data.name}}</span>
-        <input type="checkbox" [(ngModel)]="node.data.search">Search
-        <input type="checkbox" [(ngModel)]="node.data.result">Result
-        <select [(ngModel)]="node.data.datatype">
-          <option value="string">String</option>
-          <option value="time">Time</option>
-          <option value="byte">Byte</option>
-          <option value="float">Float</option>
-          <option value="long">Long</option>
-          <option value="int">Integer</option>
-        </select>
+        <span class="config-text">
+          <span tabindex="0" role="button" data-container="body" data-trigger="focus hover" data-toggle="popover" data-placement="right"
+            data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">{{ node.data.name }}</span>
+          <div class="popover hide">
+            <div class="arrow"></div>
+            <h3 class="popover-header">
+              <span class="search-bx tree-chkbx">Search</span>
+              <span class="result-bx tree-chkbx">Result</span>
+              <span class="type-bx tree-chkbx">Type</span>
+              <span class="delete-bx tree-chkbx">
+                <fa name="trash"></fa> v
+              </span>
+            </h3>
+            <div class="popover-body">
+              <span class="search-bx tree-chkbx">
+                <input type="checkbox" [(ngModel)]="node.data.search">
+              </span>
+              <span class="result-bx tree-chkbx">
+                <input type="checkbox" [(ngModel)]="node.data.result">
+              </span>
+              <select [(ngModel)]="node.data.datatype" class="type-bx tree-chkbx">
+                <option value="string">String</option>
+                <option value="time">Time</option>
+                <option value="byte">Byte</option>
+                <option value="float">Float</option>
+                <option value="long">Long</option>
+                <option value="int">Integer</option>
+              </select>
+            </div>
+          </div>
+        </span>
+        <!-- <span  class="remove-bx" (click)="removeNode($event, node, tree)">
+          <fa name="trash"></fa>
+        </span> -->
+
       </ng-template>
     </tree-root>
   </div>
 </div>
+<a id="update-save-tree" (click)="deleteThenSave()" class="hide"></a>
+<a id="undo-last" (click)="undoLastRemoveNode()" class="hide"></a>

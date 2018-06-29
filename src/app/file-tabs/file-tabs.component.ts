@@ -17,6 +17,22 @@ export class FileTabsComponent implements OnInit {
       const fileName = file.substring(file.lastIndexOf('/') + 1);
       this.fileList.push(fileName);
     });
+    const fn = () => {
+      const lastFile: HTMLAnchorElement = document.querySelector('.hori-tab');
+      if (lastFile) {
+        lastFile.click();
+        clearInterval(k);
+      }
+    };
+    const k = setInterval(fn, 200);
   }
 
+  activeTab(_event) {
+    const horiTab = document.querySelectorAll('.hori-tab');
+    for (let i = 0; i < horiTab.length; i++) {
+      horiTab[i].classList.remove('active');
+    }
+    const target = _event.target;
+    target.classList.add('active');
+  }
 }

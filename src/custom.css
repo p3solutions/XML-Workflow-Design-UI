@@ -1,94 +1,79 @@
-div.tree div.tree-children::before,
-div.tree::before {
-  content: "";
-  position: absolute;
-  border-left: 1px dotted #23527c;
-  height: 100%;
-  top: -14px;
-  left: 12px
+/* delete feature css */
+.hide {
+  display: none;
 }
-
-div.tree {
-  padding-left: 0;
-  margin-left: -5px
+.m-t-0 {
+  margin-top: 0;
 }
-
-div.tree div.tree-children {
-  position: relative;
-  padding-left: 0;
-  margin-left: 16px
+.m-l-20 {
+  margin-left: 20px;
 }
-
-div.tree div.tree-children::before {
-  left: 5px
+.m-r-20 {
+  margin-right: 20px;
 }
-
-div.tree tree-node>div>.node-wrapper {
-  margin-left: 24px
+.m-20 {
+  margin: 20px;
 }
-
-div.tree tree-node>div>.node-wrapper>.node-content-wrapper {
-  margin-left: 4px
+.m-0-20 {
+  margin: 0 20px;
 }
-
-div.tree tree-node>div.tree-node-leaf>.node-wrapper {
-  margin-left: 0
+.p-0 {
+  padding: 0;
 }
-
-div.tree tree-node>div::before {
-  content: "";
-  position: absolute;
-  border-bottom: 1px dotted #23527c;
-  width: 7px;
-  margin-top: 12px;
-  left: 7px
+.p-t-0 {
+  padding-top: 0!important;
 }
-
-div.tree tree-node>div .toggle-children-wrapper {
-  width: 13px;
-  height: 13px;
-  border: 1px solid #23527c;
-  position: absolute;
-  left: 15px;
-  margin-top: 5px;
-  margin-left: 0;
+.trim-text {
   display: inline-block;
-  background-color: #fff;
-  z-index: 1
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-
-div.tree tree-node>div .toggle-children-wrapper::before {
-  content: "";
-  display: inline-block;
-  width: 7px;
-  border-top: 1px solid #23527c;
+.scrollable-height {
+  height: 435px;
+  overflow: auto;
+}
+.card-header-ht {
+  height: 55px;
+  padding: 1rem 0.75rem;
+}
+.output-text {
+  border-radius: 0.25rem;
+}
+.undo-remove-bx {
+  margin: 0 5px;
+  font-size: 13px;
+  left: 0;
   position: absolute;
-  top: 5px;
-  left: 2px
+  color: rgb(166,166,166);
 }
-
-div.tree tree-node>div .toggle-children-wrapper.toggle-children-wrapper-collapsed::after {
-  content: "";
+.undo-remove-bx:hover {
+  margin-top: -8px;
+  font-size: 20px;
+  color: #007bff;
+}
+.trim-text {
   display: inline-block;
-  height: 7px;
-  border-left: 1px solid #23527c;
-  position: absolute;
-  top: 2px;
-  left: 5px
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-div.tree tree-node>div .toggle-children-wrapper .toggle-children {
-  display: none
+/* tree css  overriding bootstrap */
+.node-content-wrapper,
+.node-content-wrapper-active, .node-content-wrapper-focused,
+.node-content-wrapper.node-content-wrapper-active:hover,
+.node-content-wrapper-active.node-content-wrapper-focused,
+.node-content-wrapper:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
-
-div.tree tree-node>div .node-content-wrapper {
-  margin-left: 4px
+.node-wrapper:hover {
+  background: #E0E0E0 !important;
+  box-shadow: inset 0 0 1px #E0E0E0 !important;
 }
-
-div.tree>tree-node>div::before {
-  left: 14px
-}
-
-div.tree>tree-node>div>.node-wrapper>tree-node-expander>.toggle-children-wrapper {
-  left: 22px
+.node-wrapper.active {
+  background: #E0E0E0 !important;
+  box-shadow: inset 0 0 1px #999 !important;
 }

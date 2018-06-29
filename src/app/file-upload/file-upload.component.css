@@ -23,4 +23,28 @@
     width: 100%;
     height: 100%;
 }
-
+.table-scrollable {
+    border-radius: 4px;
+}
+.table-scrollable tbody {
+    height:200px;
+    overflow-y:auto;
+    width: 100%;
+}
+.table-scrollable thead,
+.table-scrollable tbody,
+.table-scrollable tr,
+.table-scrollable td,
+.table-scrollable th{
+    display:block;
+}
+.table-scrollable thead,tbody,tr{
+    margin: 0;
+    padding: 0;
+}
+.td-file-name .trim-text {
+    width: 175px;
+}
+.td-file-name:hover {
+    background-color: #dfdfdf;
+}
