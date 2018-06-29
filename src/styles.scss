@@ -5,8 +5,16 @@ $body-bg: #FAFAFA;
 @import "../node_modules/bootstrap/scss/bootstrap";
 @import '../node_modules/angular-tree-component/dist/angular-tree-component.css';
 
-
+@font-face {
+    font-family: robotoFont;
+    src: url(./assets/fonts/Roboto-Regular.ttf);
+}
+body {
+    font-family: robotoFont;
+    font-size: 17px;
+}
 /* adding rhs ng-compo-tree css */
+
 .rhs-tree{
     .toggle-children-wrapper {
         padding: 2px 1px 5px 0px;
@@ -43,12 +51,14 @@ $body-bg: #FAFAFA;
         top: -15px;
         left: -15px;
     }
-    
-    tree-node:last-child > .tree-node > .tree-children::after {
-        border-left: none;
-    }
-    
     .toggle-children {
         z-index: 1;
     }
+    
+    tree-node:last-child > .tree-node > .tree-children::after {
+        border-left: none;
+        border-left: 1px dotted lightgrey;
+    }
+    
 }  
+

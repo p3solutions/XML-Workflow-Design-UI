@@ -23,13 +23,13 @@ export class StructureDefinitionComponent implements OnInit {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
           tree.copyNode(from, to);
           console.log($event);
-          // setTimeout(this.colorRHStree, 10);
+          setTimeout(this.colorRHStree, 10);
           this.saveTree();
         },
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
             TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
-            // this.colorRHStree();
+            this.colorRHStree();
           }
         }
       },
@@ -85,6 +85,7 @@ export class StructureDefinitionComponent implements OnInit {
       this.deleteNode.targetNode.remove();
       this.deleteNode = {};
       this.saveTree();
+      this.colorRHStree();
     }
   }
   // selectionForDelete(node, _event) {
@@ -94,13 +95,17 @@ export class StructureDefinitionComponent implements OnInit {
   //     node.delete = false;
   //   }
   // }
-  // colorRHStree() {
-  //   $('.rhs-tree .node-wrapper ').each((i, el) => {
-  //     let color = '#ffffff';
-  //     if (i % 2 === 0) {
-  //             color = '#dfdfdf';
-  //         }
-  //     $(el).css('background', color);
-  //   });
-  // }
+  colorRHStree() {
+    $('.node-wrapper ').each((i, el) => {
+      let color = '#F7F7F7';
+      if (i % 2 === 0) {
+              color = '#ffffff';
+          }
+      $(el).css({'background': color, 'border': '1px solid F7F7F7'});
+    });
+  }
+  onToggle(_event) {
+    console.log('toggle');
+    setTimeout(this.colorRHStree, 10);
+  }
 }

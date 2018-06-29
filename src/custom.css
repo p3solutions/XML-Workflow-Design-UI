@@ -58,3 +58,22 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+/* tree css  overriding bootstrap */
+.node-content-wrapper,
+.node-content-wrapper-active, .node-content-wrapper-focused,
+.node-content-wrapper.node-content-wrapper-active:hover,
+.node-content-wrapper-active.node-content-wrapper-focused,
+.node-content-wrapper:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+.node-wrapper:hover {
+  background: #E0E0E0 !important;
+  box-shadow: inset 0 0 1px #E0E0E0 !important;
+}
+.node-wrapper.active {
+  background: #E0E0E0 !important;
+  box-shadow: inset 0 0 1px #999 !important;
+}
