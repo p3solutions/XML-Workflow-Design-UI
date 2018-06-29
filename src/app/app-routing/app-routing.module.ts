@@ -20,9 +20,6 @@ const routes: Routes = [
           {
             path: 'tree/:name', component: TreeViewComponent
           },
-          {
-            path: '*', component: DefinitionStepComponent
-          }
         ]
       },
       {

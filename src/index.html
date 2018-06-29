@@ -13,7 +13,10 @@
 <body>
   <app-root></app-root>
   <script>
-    window.$ = window.jQuery = require('jquery');
+    if (typeof module === 'object') {
+      window.module = module;
+      module = undefined;
+    }
   </script>
 </body>
 

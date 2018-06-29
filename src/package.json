@@ -1,0 +1,7 @@
+{
+  "name": "xml-workflow-design",
+  "productName": "XML Workflow Design",
+  "version": "1.0.0",
+  "description": "An application to create a wrokflow design for XML files",
+  "main": "electron.prod.js"
+}
