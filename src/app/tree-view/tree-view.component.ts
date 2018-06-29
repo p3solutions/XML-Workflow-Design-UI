@@ -37,7 +37,6 @@ export class TreeViewComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.expandRoot();
     this.getData();
   }
 
@@ -62,10 +61,6 @@ export class TreeViewComponent implements OnInit, OnChanges {
       }
     }
   }
-  expandRoot() {
-    // const someNode = this.tree.treeModel.getNodeById('1');
-    // someNode.expand();
-  }
   colorRHStree() {
     $('.lhs-tree .node-wrapper').each((i, el) => {
       let color = '#FFFFFF';
@@ -78,7 +73,19 @@ export class TreeViewComponent implements OnInit, OnChanges {
   onToggle() {
     setTimeout(this.colorRHStree, 10);
   }
-  onInitialized() {
-    setTimeout(this.colorRHStree, 10);
+  expandNode(node) {
+    if (!node.isExpanded && node.hasChildren) {
+      node.expand();
+      node.setActiveAndVisible();
+    }
+  }
+  onInitialized(_event) {
+    setTimeout( () => { // instantly root is not available hence using setTimeout
+    if (_event.treeModel && _event.treeModel.roots &&
+      _event.treeModel.roots[0]) {
+        this.expandNode(_event.treeModel.roots[0]);
+      }
+      this.colorRHStree();
+    }, 100);
   }
 }

@@ -6,7 +6,8 @@
     </div>
   </div>
   <div class="card-body scrollable-height rhs-tree">
-    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized()">
+    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()"
+     (initialized)="onInitialized($event)" (copyNode)="onCopyNode($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span class="config-text">
           <span>{{ node.data.name}}</span>

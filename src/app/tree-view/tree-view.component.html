@@ -1,2 +1,2 @@
-<tree-root [nodes]="nodes.data.treeview.fileValue.tree"
- [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized()"></tree-root>
+<tree-root [nodes]="nodes?.data?.treeview?.fileValue?.tree"
+ [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"></tree-root>

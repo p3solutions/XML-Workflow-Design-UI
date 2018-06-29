@@ -5,7 +5,8 @@
         Final structure to be generated:
       </div>
       <div class="card-body pre-scrollable">
-        <tree-root [nodes]="nodes ? nodes : null" [options]="options"></tree-root>
+        <tree-root [nodes]="nodes ? nodes : null" [options]="options"
+          (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"></tree-root>
       </div>
     </div>
   </div>

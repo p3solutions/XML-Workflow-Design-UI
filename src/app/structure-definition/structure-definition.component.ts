@@ -22,9 +22,9 @@ export class StructureDefinitionComponent implements OnInit {
       mouse: {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
           tree.copyNode(from, to);
-          console.log($event);
-          setTimeout(this.colorRHStree, 10);
           this.saveTree();
+          this.expandNode(to.parent);
+          setTimeout(this.colorRHStree, 10);
         },
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
@@ -107,8 +107,21 @@ export class StructureDefinitionComponent implements OnInit {
   onToggle() {
     setTimeout(this.colorRHStree, 10);
   }
-  onInitialized() {
-    setTimeout(this.colorRHStree, 10);
-    console.log('init');
+
+  expandNode(node) {
+    if (!node.isExpanded && node.hasChildren) {
+      node.expand();
+      node.setActiveAndVisible();
+    }
+  }
+  onInitialized(_event) {
+    const rootNode = _event.treeModel.roots[0];
+    this.expandNode(rootNode);
+    this.colorRHStree();
+  }
+  onCopyNode(_event) {
+    const copiedNode = _event.treeModel.getNodeById(_event.node.id);
+    this.expandNode(copiedNode.parent);
+    this.colorRHStree();
   }
 }
