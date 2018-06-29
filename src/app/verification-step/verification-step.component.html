@@ -1,4 +1,4 @@
-<div class="row  container-fluid">
+<div class="row container-fluid m-0">
   <div class="col-md-10">
     <div class="card">
       <div class="card-header">
@@ -11,7 +11,7 @@
   </div>
   <div class="col-md-2">
     <button type="button" class="btn btn-secondary submit-btn m-20" style="display: none;">Generate PDI Metadata</button>
-    <button type="button" class="btn btn-secondary submit-btn m-0-20" (click)="downloadFile()">Generate WorkFlow
+    <button type="button" class="btn btn-secondary submit-btn" (click)="downloadFile()">Generate WorkFlow
       <fa *ngIf="loader" name="spinner fa-spin"></fa>
     </button>
   </div>
