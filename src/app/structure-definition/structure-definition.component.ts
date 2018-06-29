@@ -96,16 +96,19 @@ export class StructureDefinitionComponent implements OnInit {
   //   }
   // }
   colorRHStree() {
-    $('.node-wrapper ').each((i, el) => {
-      let color = '#F7F7F7';
+    $('.rhs-tree .node-wrapper').each((i, el) => {
+      let color = '#FFFFFF';
       if (i % 2 === 0) {
-              color = '#ffffff';
+              color = '#F7F7F7';
           }
-      $(el).css({'background': color, 'border': '1px solid F7F7F7'});
+      $(el).css({'background': color});
     });
   }
-  onToggle(_event) {
-    console.log('toggle');
+  onToggle() {
     setTimeout(this.colorRHStree, 10);
+  }
+  onInitialized() {
+    setTimeout(this.colorRHStree, 10);
+    console.log('init');
   }
 }

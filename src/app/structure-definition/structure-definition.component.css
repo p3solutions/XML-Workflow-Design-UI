@@ -45,7 +45,7 @@
 .config-text .popover {
     display: none;
     left: 99.5%;
-    top: -5px;
+    top: -3px;
     width: 270px;
 }
 .config-text:hover>.popover {

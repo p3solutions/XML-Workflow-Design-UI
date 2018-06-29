@@ -19,6 +19,16 @@ export class TreeViewComponent implements OnInit, OnChanges {
   options = {
     allowDrag: true,
     allowDrop: false,
+    actionMapping: {
+      mouse: {
+        dblClick: (tree, node, $event) => {
+          if (node.hasChildren) {
+            TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+            this.colorRHStree();
+          }
+        }
+      },
+    }
   };
   tree: any;
   constructor(
@@ -55,5 +65,20 @@ export class TreeViewComponent implements OnInit, OnChanges {
   expandRoot() {
     // const someNode = this.tree.treeModel.getNodeById('1');
     // someNode.expand();
+  }
+  colorRHStree() {
+    $('.lhs-tree .node-wrapper').each((i, el) => {
+      let color = '#FFFFFF';
+      if (i % 2 === 0) {
+              color = '#F7F7F7';
+          }
+      $(el).css({'background': color});
+    });
+  }
+  onToggle() {
+    setTimeout(this.colorRHStree, 10);
+  }
+  onInitialized() {
+    setTimeout(this.colorRHStree, 10);
   }
 }
