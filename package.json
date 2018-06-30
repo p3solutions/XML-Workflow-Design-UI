@@ -12,7 +12,9 @@
     "e2e": "ng e2e",
     "electron": "ng build && electron ./src/electron.dev",
     "electron-package:mac": "ng build && cross-var electron-packager ./dist/xml-workflow-design $npm_package_name-$npm_package_version --overwrite --platform=darwin --out=release-build --arch=x64 --icon=dist/xml-workflow-design/assets/brand/suite.icns",
-    "electron-package:win": "electron-packager . --platform=win32"
+    "electron-package:win": "ng build && cross-var electron-packager ./dist/xml-workflow-design $npm_package_name-$npm_package_version --overwrite --platform=win32 --out=release-build --arch=all --icon=dist/xml-workflow-design/assets/brand/suite.ico",
+    "electron-package:linux": "ng build && cross-var electron-packager ./dist/xml-workflow-design $npm_package_name-$npm_package_version --overwrite --platform=linux --out=release-build --arch=all --icon=dist/xml-workflow-design/assets/brand/suite.icns",
+    "electron-package:all": "ng build && cross-var electron-packager ./dist/xml-workflow-design $npm_package_name-$npm_package_version --overwrite --all --out=release-build --arch=all --icon=dist/xml-workflow-design/assets/brand/suite.icns"
   },
   "private": true,
   "dependencies": {
