@@ -1,13 +1,9 @@
-import { Component, OnInit, Input, DoCheck, OnChanges, SimpleChanges, SimpleChange } from '@angular/core';
-import { v4 } from 'uuid';
-import { TreeNode, TreeModel, TREE_ACTIONS, KEYS, IActionMapping, ITreeOptions } from 'angular-tree-component';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { TREE_ACTIONS } from 'angular-tree-component';
 import { TreeViewService } from './tree-view.service';
 import { TreeViewModel } from './tree-model';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
-
-const actionMapping: IActionMapping = {
-};
 
 @Component({
   selector: 'app-tree-view',
@@ -65,9 +61,9 @@ export class TreeViewComponent implements OnInit, OnChanges {
     $('.lhs-tree .node-wrapper').each((i, el) => {
       let color = '#FFFFFF';
       if (i % 2 === 0) {
-              color = '#F7F7F7';
-          }
-      $(el).css({'background': color});
+        color = '#F7F7F7';
+      }
+      $(el).css({ 'background': color });
     });
   }
   onToggle() {
@@ -80,9 +76,9 @@ export class TreeViewComponent implements OnInit, OnChanges {
     }
   }
   onInitialized(_event) {
-    setTimeout( () => { // instantly root is not available hence using setTimeout
-    if (_event.treeModel && _event.treeModel.roots &&
-      _event.treeModel.roots[0]) {
+    setTimeout(() => { // instantly root is not available hence using setTimeout
+      if (_event.treeModel && _event.treeModel.roots &&
+        _event.treeModel.roots[0]) {
         this.expandNode(_event.treeModel.roots[0]);
       }
       this.colorRHStree();

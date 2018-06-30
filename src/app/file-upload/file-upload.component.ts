@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { UploadFile, UploadEvent } from 'ngx-file-drop';
+import { UploadFile } from 'ngx-file-drop';
 import { FileUploadService } from './file-upload.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { FileInfo, FileUpload } from '../file-info';
