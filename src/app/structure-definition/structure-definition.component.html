@@ -6,7 +6,8 @@
     </div>
   </div>
   <div class="card-body scrollable-height rhs-tree">
-    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle($event)">
+    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()"
+     (initialized)="onInitialized($event)" (copyNode)="onCopyNode($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span class="config-text">
           <span tabindex="0" role="button" data-container="body" data-trigger="focus hover" data-toggle="popover" data-placement="right"
@@ -22,20 +23,23 @@
               </span>
             </h3>
             <div class="popover-body">
-              <span class="search-bx tree-chkbx">
-                <input type="checkbox" [(ngModel)]="node.data.search">
-              </span>
-              <span class="result-bx tree-chkbx">
-                <input type="checkbox" [(ngModel)]="node.data.result">
-              </span>
-              <select [(ngModel)]="node.data.datatype" class="type-bx tree-chkbx">
-                <option value="string">String</option>
-                <option value="time">Time</option>
-                <option value="byte">Byte</option>
-                <option value="float">Float</option>
-                <option value="long">Long</option>
-                <option value="int">Integer</option>
-              </select>
+                <span class="search-bx tree-chkbx">Search
+                    <input type="checkbox" [(ngModel)]="node.data.search">
+                  </span>
+                  <span class="result-bx tree-chkbx">Result
+                    <input type="checkbox" [(ngModel)]="node.data.result">
+                  </span>
+                  <select [(ngModel)]="node.data.datatype" class="type-bx tree-chkbx">
+                    <option value="string">String</option>
+                    <option value="time">Time</option>
+                    <option value="byte">Byte</option>
+                    <option value="float">Float</option>
+                    <option value="long">Long</option>
+                    <option value="int">Integer</option>
+                  </select>
+                  <span class="delete-bx tree-chkbx" (click)="confirmDelete($event, node, tree)">
+                    <fa name="trash"></fa>
+                  </span>
             </div>
           </div>
         </span>

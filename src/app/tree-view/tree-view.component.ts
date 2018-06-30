@@ -19,6 +19,16 @@ export class TreeViewComponent implements OnInit, OnChanges {
   options = {
     allowDrag: true,
     allowDrop: false,
+    actionMapping: {
+      mouse: {
+        dblClick: (tree, node, $event) => {
+          if (node.hasChildren) {
+            TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+            this.colorRHStree();
+          }
+        }
+      },
+    }
   };
   tree: any;
   constructor(
@@ -27,7 +37,6 @@ export class TreeViewComponent implements OnInit, OnChanges {
   ) { }
 
   ngOnInit() {
-    this.expandRoot();
     this.getData();
   }
 
@@ -52,8 +61,31 @@ export class TreeViewComponent implements OnInit, OnChanges {
       }
     }
   }
-  expandRoot() {
-    // const someNode = this.tree.treeModel.getNodeById('1');
-    // someNode.expand();
+  colorRHStree() {
+    $('.lhs-tree .node-wrapper').each((i, el) => {
+      let color = '#FFFFFF';
+      if (i % 2 === 0) {
+              color = '#F7F7F7';
+          }
+      $(el).css({'background': color});
+    });
+  }
+  onToggle() {
+    setTimeout(this.colorRHStree, 10);
+  }
+  expandNode(node) {
+    if (!node.isExpanded && node.hasChildren) {
+      node.expand();
+      node.setActiveAndVisible();
+    }
+  }
+  onInitialized(_event) {
+    setTimeout( () => { // instantly root is not available hence using setTimeout
+    if (_event.treeModel && _event.treeModel.roots &&
+      _event.treeModel.roots[0]) {
+        this.expandNode(_event.treeModel.roots[0]);
+      }
+      this.colorRHStree();
+    }, 100);
   }
 }
