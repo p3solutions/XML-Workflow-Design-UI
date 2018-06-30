@@ -22,9 +22,9 @@ export class StructureDefinitionComponent implements OnInit {
       mouse: {
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
           tree.copyNode(from, to);
-          console.log($event);
-          setTimeout(this.colorRHStree, 10);
           this.saveTree();
+          this.expandNode(to.parent);
+          setTimeout(this.colorRHStree, 10);
         },
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
@@ -96,16 +96,32 @@ export class StructureDefinitionComponent implements OnInit {
   //   }
   // }
   colorRHStree() {
-    $('.node-wrapper ').each((i, el) => {
-      let color = '#F7F7F7';
+    $('.rhs-tree .node-wrapper').each((i, el) => {
+      let color = '#FFFFFF';
       if (i % 2 === 0) {
-              color = '#ffffff';
+              color = '#F7F7F7';
           }
-      $(el).css({'background': color, 'border': '1px solid F7F7F7'});
+      $(el).css({'background': color});
     });
   }
-  onToggle(_event) {
-    console.log('toggle');
+  onToggle() {
     setTimeout(this.colorRHStree, 10);
+  }
+
+  expandNode(node) {
+    if (!node.isExpanded && node.hasChildren) {
+      node.expand();
+      node.setActiveAndVisible();
+    }
+  }
+  onInitialized(_event) {
+    const rootNode = _event.treeModel.roots[0];
+    this.expandNode(rootNode);
+    this.colorRHStree();
+  }
+  onCopyNode(_event) {
+    const copiedNode = _event.treeModel.getNodeById(_event.node.id);
+    this.expandNode(copiedNode.parent);
+    this.colorRHStree();
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ITreeOptions } from 'angular-tree-component';
+import { ITreeOptions, TREE_ACTIONS } from 'angular-tree-component';
 
 @Component({
   selector: 'app-verification-step',
@@ -11,6 +11,16 @@ export class VerificationStepComponent implements OnInit {
   options: ITreeOptions = {
     allowDrag: (node) => node.isLeaf,
     allowDrop: true,
+    actionMapping: {
+      mouse: {
+        dblClick: (tree, node, $event) => {
+          if (node.hasChildren) {
+            TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
+            this.colorRHStree();
+          }
+        }
+      },
+    }
   };
   loader = false;
   constructor() { }
@@ -56,5 +66,31 @@ export class VerificationStepComponent implements OnInit {
     a.dispatchEvent(e);
     this.loader = false;
   }
-
+  colorRHStree() {
+    $('.node-wrapper').each((i, el) => {
+      let color = '#FFFFFF';
+      if (i % 2 === 0) {
+              color = '#F7F7F7';
+          }
+      $(el).css({'background': color});
+    });
+  }
+  onToggle() {
+    setTimeout(this.colorRHStree, 10);
+  }
+  expandNode(node) {
+    if (!node.isExpanded && node.hasChildren) {
+      node.expand();
+      node.setActiveAndVisible();
+    }
+  }
+  onInitialized(_event) {
+    setTimeout( () => {
+    if (_event.treeModel && _event.treeModel.roots &&
+      _event.treeModel.roots[0]) {
+        this.expandNode(_event.treeModel.roots[0]);
+      }
+      this.colorRHStree();
+    }, 100);
+  }
 }
