@@ -10,7 +10,7 @@
       </form>
     </div>
     <div class="row">
-      <div class="col-md-2" *ngIf="prevFileList.length > 0">
+      <!-- <div class="col-md-2" *ngIf="prevFileList.length > 0">
         <table class="table table-bordered table-scrollable">
           <thead class="bg-dark text-white">
             <tr class="text-center">
@@ -25,9 +25,9 @@
             </tr>
           </tbody>
         </table>
-      </div>
-      <div class="upload-table {{(prevFileList.length > 0)? 'col-md-10' : 'col-md-12'}}">
-        <table class="table table-bordered">
+      </div> -->
+      <div class="upload-table col-md-12 scrollable-height">
+        <table class="table table-bordered ">
           <thead class="bg-dark text-white">
             <tr class="text-center">
               <th scope="col">File Name</th>
@@ -35,13 +35,13 @@
               <th scope="col" >File Uploaded Status</th>
             </tr>
           </thead>
-          <tbody *ngIf="fileInfoList.length > 0" class="upload-name-style">
+          <tbody *ngIf="fileInfoList.length > 0" class="upload-name-style ">
             <tr *ngFor="let file of fileInfoList; let i=index">
               <td scope="row">
                 <strong>{{ file.fileName }}</strong>
               </td>
               <td scope="row" class="text-center">
-                {{ (file.size)/1024 | number}}
+                {{(file.size)/1024 | number}} {{!file.size ? '--' : ''}}
               </td>
               <td scope="row" class="text-center">
                 {{file.status}}

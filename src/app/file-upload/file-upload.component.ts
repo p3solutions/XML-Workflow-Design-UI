@@ -64,7 +64,7 @@ export class FileUploadComponent implements OnInit {
       fileInfo.size = files.item(index).size;
       fileInfo.type = files.item(index).type;
       fileInfo.status = 'Uploaded';
-      this.fileInfoList.push(fileInfo);
+      this.fileInfoList.unshift(fileInfo);
       this.table = false;
     }
     this.fileUploadService.uploadFile(this.fileToUpload).subscribe(
@@ -88,8 +88,12 @@ export class FileUploadComponent implements OnInit {
     if (this.prevFiles !== null) {
       const files = this.prevFiles.substring(0, this.prevFiles.lastIndexOf(','));
       files.split(',').forEach(file => {
-        const fileName = file.substring(file.lastIndexOf('/') + 1);
-        this.prevFileList.push(fileName);
+      const fileInfo: FileInfo = new FileInfo();
+      fileInfo.fileName = file.substring(file.lastIndexOf('/') + 1);
+      // fileInfo.size = files.item(index).size;
+      // fileInfo.type = files.item(index).type;
+      fileInfo.status = 'Recently Uploaded';
+        this.fileInfoList.push(fileInfo);
       });
     }
   }
