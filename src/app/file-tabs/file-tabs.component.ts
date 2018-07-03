@@ -14,6 +14,7 @@ export class FileTabsComponent implements OnInit {
     files = files.substring(0, files.lastIndexOf(','));
     const filesList = files.split(',');
     filesList.forEach(file => {
+      file = file.replace(/\\/g,'/');
       const fileName = file.substring(file.lastIndexOf('/') + 1);
       this.fileList.push(fileName);
     });
