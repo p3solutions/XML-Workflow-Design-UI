@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileUploadService {
-  private fileUploadUrl = environment.apiUrl + 'upload/multi';
+  private fileUploadUrl = environment.apiUrl + '/files/multi';
   constructor(private http: HttpClient) { }
   uploadFile(fileToUpload: File[]): Observable<any> {
     const formData: FormData = new FormData();

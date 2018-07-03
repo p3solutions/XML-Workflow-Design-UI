@@ -10,7 +10,7 @@ export class TreeViewService {
   // environment.apiUrl + 'fileUpload';
   constructor(private http: HttpClient) { }
   getTree(name: string): Observable<any> {
-    let fileUploadUrl = environment.apiUrl + 'tree/files/';
+    let fileUploadUrl = environment.apiUrl + '/api/tree/files/';
     fileUploadUrl = fileUploadUrl.concat(name);
     console.log(fileUploadUrl);
     return this.http.get(fileUploadUrl);

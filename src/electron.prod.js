@@ -22,7 +22,7 @@ function createWindow() {
   window.maximize();
   window.isMinimizable(false);
   
-  window.webContents.openDevTools();
+  // window.webContents.openDevTools();
 
   window.on('closed', function () {
     window = null;
