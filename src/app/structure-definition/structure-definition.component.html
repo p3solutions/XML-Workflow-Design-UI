@@ -9,8 +9,7 @@
       (copyNode)="onCopyNode($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span class="config-text">
-          <span tabindex="0" role="button" data-container="body" data-trigger="focus hover" data-toggle="popover" data-placement="right"
-            data-content="Vivamus sagittis lacus vel augue laoreet rutrum faucibus.">{{ node.data.name }}</span>
+          <span tabindex="0" role="button">{{ node.data.name }}</span>
           <div class="popover hide">
             <div class="arrow"></div>
             <div class="popover-body">

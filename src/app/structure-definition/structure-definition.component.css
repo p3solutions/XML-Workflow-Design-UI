@@ -46,11 +46,12 @@
     display: none;
     left: 99.5%;
     top: -3px;
-    width: 270px;
+    max-width: 300px;
+    width: 265px;
 }
 .config-text:hover>.popover {
     display: block;
 }
 .popover-body {
-    padding: 0.2rem 0.75rem;
+    padding: 0.2rem;
 }
