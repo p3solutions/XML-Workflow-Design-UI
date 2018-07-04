@@ -9,8 +9,8 @@ import { ITreeOptions, TREE_ACTIONS } from 'angular-tree-component';
 export class VerificationStepComponent implements OnInit {
   nodes = [];
   options: ITreeOptions = {
-    allowDrag: (node) => node.isLeaf,
-    allowDrop: true,
+    allowDrag: false,
+    allowDrop: false,
     actionMapping: {
       mouse: {
         dblClick: (tree, node, $event) => {
