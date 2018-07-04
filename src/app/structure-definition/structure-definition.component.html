@@ -21,12 +21,12 @@
                 <input type="checkbox" [(ngModel)]="node.data.result">
               </span>
               <select [(ngModel)]="node.data.datatype" class="type-bx tree-chkbx">
-                <option value="string">String</option>
-                <option value="time">Time</option>
-                <option value="byte">Byte</option>
-                <option value="float">Float</option>
-                <option value="long">Long</option>
-                <option value="int">Integer</option>
+                <option value="STRING">String</option>
+                <option value="INTEGER">Integer</option>
+                <option value="LONG">Long</option>
+                <option value="DOUBLE">Double</option>
+                <option value="DATE">Date</option>
+                <option value="DATETIME">DateTime</option>
               </select>
               <span class="delete-bx tree-chkbx" (click)="confirmDelete($event, node, tree)">
                 <fa name="trash"></fa>
