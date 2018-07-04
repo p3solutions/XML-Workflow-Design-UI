@@ -12,11 +12,20 @@ import { switchMap } from 'rxjs/operators';
 })
 export class TreeViewComponent implements OnInit, OnChanges {
   nodes: TreeViewModel;
+  draggedTarget: any;
   options = {
     allowDrag: true,
     allowDrop: false,
     actionMapping: {
       mouse: {
+        dragStart: (tree, node, $event) => {
+          this.draggedTarget = $($event.target);
+          this.draggedTarget.addClass('drag-view');
+        },
+        dragEnd: () => {
+          this.draggedTarget.removeClass('drag-view');
+          this.draggedTarget = null;
+        },
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
             TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);

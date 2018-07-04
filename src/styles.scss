@@ -36,7 +36,9 @@ body {
         width: 20px;
         left: -28px;
     }
-    
+    .drag-view.node-content-wrapper::before {
+        display: none;
+    }
     .tree-node-level-1 > tree-node-wrapper > .node-wrapper > .node-content-wrapper::before {
         display: none;
     }
