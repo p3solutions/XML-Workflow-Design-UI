@@ -11,6 +11,7 @@ export class StructureDefinitionComponent implements OnInit {
   isResult = true;
   draggedTarget: any;
   enableDelete = false;
+  deleteProgress = false;
   @ViewChild('tree') sdTree;
   nodes = [{
     id: 1, // pagedata node delete option is hidden on this id basis, changing this will display the delete icon
@@ -147,6 +148,7 @@ export class StructureDefinitionComponent implements OnInit {
     this.enableDisableMultiDeleteButton();
   }
   multiDelete() {
+    this.deleteProgress = true;
     const tree = this.sdTree.treeModel;
     const targetIdsArray = [];
     for (let key in tree.selectedLeafNodeIds) {
@@ -170,6 +172,7 @@ export class StructureDefinitionComponent implements OnInit {
     tree.update();
     this.saveTree();
     this.colorRHStree();
+    this.deleteProgress = false;
   }
   enableDisableMultiDeleteButton() {
     setTimeout(() => {
