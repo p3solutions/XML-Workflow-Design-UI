@@ -26,7 +26,7 @@ export class StructureDefinitionComponent implements OnInit {
       mouse: {
         checkboxClick : (tree: TreeModel, node: TreeNode, $event: any) => {
           node.toggleSelected();
-          this.highlightedSelected($event.target, node);
+          // this.highlightedSelected($event.target, node);
           this.enableDisableMultiDeleteButton();
         },
         dragStart: (tree, node, $event) => {
@@ -47,7 +47,7 @@ export class StructureDefinitionComponent implements OnInit {
           if (node.hasChildren) {
             TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
             this.colorRHStree();
-            this.highlightedSelected($event.target, node);
+            // this.highlightedSelected($event.target, node);
             this.enableDisableMultiDeleteButton();
           }
         }
@@ -187,11 +187,11 @@ export class StructureDefinitionComponent implements OnInit {
         for (let i = 0; i < $event.node.children.length; i++) {
           children.push($event.node.children[i]);
         }
-        children.forEach( (child) => {
-          const childDOM = $('#' + child.id);
-          // console.log('onToggleExpanded', childDOM, child);
-          this.highlightedSelected(childDOM, child);
-        });
+        // children.forEach( (child) => {
+        //   const childDOM = $('#' + child.id);
+        //   // console.log('onToggleExpanded', childDOM, child);
+        //   this.highlightedSelected(childDOM, child);
+        // });
       }, 100);
     }
   }

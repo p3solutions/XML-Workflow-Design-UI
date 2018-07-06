@@ -2,7 +2,8 @@
   <div class="card-header card-header-ht">
     <div class="col-md-12">
       <span class="tree-chkbx">Configuration</span>
-      <span title="{{enableDelete ? 'Delete selected' : 'Select items first'}}" class="multi-delete-bx pull-right" (click)="enableDelete ? openConfirmDeleteModal(): null" [ngClass]="{'enabled': enableDelete}">
+      <span title="{{enableDelete ? 'Delete selected' : 'Select items first'}}" class="multi-delete-bx pull-right" (click)="enableDelete ? openConfirmDeleteModal(): null"
+        [ngClass]="{'enabled': enableDelete}">
         <fa *ngIf="deleteProgress" name="spinner fa-spin m-10 col-black"></fa>
         <fa name="trash fa-lg"></fa>
       </span>
@@ -12,7 +13,7 @@
     <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"
       (copyNode)="onCopyNode($event)" (toggleExpanded)="onToggleExpanded($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
-        <span class="config-text">
+        <span class="config-text" [ngClass]="{'selected-to-delete': node.isSelected}">
           <span tabindex="0" role="button" id="{{node.data.id}}">{{ node.data.name }}</span>
           <div class="popover hide">
             <div class="arrow"></div>
@@ -53,7 +54,8 @@
       </div>
       <div class="modal-body">
         <div class="text-center">
-          This will delete item(s) permanently. <br> If it contains children, it will also be deleted.
+          This will delete item(s) permanently.
+          <br> If it contains children, it will also be deleted.
           <br>Are you sure?
         </div>
       </div>
