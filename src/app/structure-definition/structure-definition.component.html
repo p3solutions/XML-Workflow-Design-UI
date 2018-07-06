@@ -3,7 +3,7 @@
     <div class="col-md-12">
       <span class="tree-chkbx">Configuration</span>
       <span title="{{enableDelete ? 'Delete selected' : 'Select items first'}}" class="multi-delete-bx pull-right" (click)="enableDelete ? openConfirmDeleteModal(): null" [ngClass]="{'enabled': enableDelete}">
-        <fa *ngIf="!deleteProgress" name="spinner fa-spin m-10 col-black"></fa>
+        <fa *ngIf="deleteProgress" name="spinner fa-spin m-10 col-black"></fa>
         <fa name="trash fa-lg"></fa>
       </span>
     </div>
