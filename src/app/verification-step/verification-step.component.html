@@ -4,7 +4,7 @@
       <div class="card-header">
         Final structure to be generated:
       </div>
-      <div class="card-body scrollable-height">
+      <div class="card-body scrollable-height verify-tree">
         <tree-root [nodes]="nodes ? nodes : null" [options]="options"
           (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"></tree-root>
       </div>
