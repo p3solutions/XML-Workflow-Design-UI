@@ -61,6 +61,16 @@ body {
         border-left: none;
         border-left: 1px dotted lightgrey;
     }
-    
+    tree-node-checkbox {
+        margin: -5px 10px 0 12px;
+        // zoom: 150%;
+        z-index: 1;
+    }
+    .selected-to-delete,
+    .selected-to-delete .node-wrapper {
+        color: #721c24 !important;
+        background-color: #f8d7da !important;
+        border-color: #f5c6cb !important;
+    }
 }  
 

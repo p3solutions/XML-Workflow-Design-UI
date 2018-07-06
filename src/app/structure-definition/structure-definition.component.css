@@ -29,11 +29,13 @@
     font-size: 13px;
     position: absolute;
 }
-.delete-bx:hover {
+.multi-delete-bx {
+    color: #cccccc;
+}
+.delete-bx:hover,
+.multi-delete-bx.enabled {
     color: #dc3545;
     cursor: pointer;
-    /* font-size: 20px; */
-    /* margin-top: -3px; */
 }
 .delete-bx {
     right: 3px;
