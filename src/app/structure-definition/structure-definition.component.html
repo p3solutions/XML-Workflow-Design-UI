@@ -13,6 +13,8 @@
     <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"
       (copyNode)="onCopyNode($event)" (toggleExpanded)="onToggleExpanded($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
+        <fa *ngIf="node.isAttribute" name="at fa-lg attr-icon"></fa>
+        <fa *ngIf="!node.isAttribute" name="code fa-lg attr-icon"></fa>
         <span class="config-text" [ngClass]="{'selected-to-delete': node.isSelected}">
           <span tabindex="0" role="button" id="{{node.data.id}}">{{ node.data.name }}</span>
           <div class="popover hide">
