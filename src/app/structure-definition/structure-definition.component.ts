@@ -38,7 +38,17 @@ export class StructureDefinitionComponent implements OnInit {
           this.draggedTarget = null;
         },
         drop: (tree: TreeModel, node: TreeNode, $event: any, { from, to }: { from: any, to: any }) => {
-          tree.copyNode(from, to);
+          const copiedFrom: any = Object.assign({}, node);
+          copiedFrom.id = Number(from.id);
+          copiedFrom.name = String(from.name);
+          copiedFrom.hasChildren = !!from.hasChildren;
+          copiedFrom.children = Object.assign({}, from.children);
+          copiedFrom.data = Object.assign({}, from.data);
+          copiedFrom._getParentsChildren = from._getParentsChildren;
+          copiedFrom.getIndexInParent = from.getIndexInParent;
+          tree.copyNode(copiedFrom, to);
+          console.log(from, copiedFrom);
+          tree.update();
           this.saveTree();
           this.expandNode(to.parent);
           setTimeout(this.colorRHStree, 10);
