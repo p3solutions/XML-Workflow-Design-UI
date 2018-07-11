@@ -85,20 +85,22 @@
       <div class="modal-body">
         <div class="row edit-row">
           <div class="col">
-            <span class="tree-chkbx">Min Occurrence
+            <span class="tree-chkbx">Mandatory
             </span>
           </div>
           <div class="col">
-            <input type="checkbox" id="selected-node-min" [checked]="(selectedNode.data.minoccurance === '1')">
+            <input type="checkbox" id="selected-node-min" [checked]="(selectedNode.data.minoccurance === '1')" 
+              (change)="handleMin()">
           </div>
         </div>
         <div class="row edit-row">
           <div class="col">
-            <span class="tree-chkbx">Max Occurrence
+            <span class="tree-chkbx">Repetitive
             </span>
           </div>
           <div class="col">
-            <input type="text" value="" [(ngModel)]="selectedNode.data.maxoccurance">
+            <input type="checkbox" id="selected-node-max" [checked]="selectedNode.data.maxoccurance === 'unbound'" 
+              (change)="handleMax()">
           </div>
         </div>
         <div class="row edit-row">

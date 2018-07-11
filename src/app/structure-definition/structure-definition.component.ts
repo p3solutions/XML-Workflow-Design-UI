@@ -226,13 +226,25 @@ export class StructureDefinitionComponent implements OnInit {
     }, 10);
   }
   savePropertyChanges() {
+    console.log(this.selectedNode.data);
+    this.saveTree();
+    this.selectedNode = null;
+  }
+  handleMin() {
     const selectedNodeMinValue  = $('#selected-node-min').is(':checked');
     if (selectedNodeMinValue) {
       this.selectedNode.data.minoccurance = '1';
     } else {
       this.selectedNode.data.minoccurance = '0';
     }
-    this.saveTree();
-    this.selectedNode = null;
+  }
+  handleMax() {
+    const selectedNodeMinValue  = $('#selected-node-max').is(':checked');
+    if (selectedNodeMinValue) {
+      this.selectedNode.data.maxoccurance = 'unbound';
+    } else {
+      this.selectedNode.data.maxoccurance = '';
+    }
   }
 }
+
