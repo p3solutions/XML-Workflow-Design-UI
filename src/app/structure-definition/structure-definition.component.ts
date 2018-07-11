@@ -65,6 +65,7 @@ export class StructureDefinitionComponent implements OnInit {
     },
   };
   deleteNode: any = {};
+  selectedNode: any;
   constructor() { }
 
   ngOnInit() {
@@ -216,5 +217,22 @@ export class StructureDefinitionComponent implements OnInit {
   }
   openConfirmDeleteModal() {
     document.getElementById('confirm-delete').click();
+  }
+
+  openEditModal(node) {
+    this.selectedNode = node;
+    setTimeout(() => {
+      document.getElementById('open-edit-modal').click();
+    }, 10);
+  }
+  savePropertyChanges() {
+    const selectedNodeMinValue  = $('#selected-node-min').is(':checked');
+    if (selectedNodeMinValue) {
+      this.selectedNode.data.minoccurance = '1';
+    } else {
+      this.selectedNode.data.minoccurance = '0';
+    }
+    this.saveTree();
+    this.selectedNode = null;
   }
 }

@@ -40,20 +40,27 @@
 .delete-bx {
     right: 3px;
 }
-.config-text {
-    position: relative;
-    padding:2px 5px
-}
+
 .config-text .popover {
     display: none;
     left: 99.5%;
     top: -3px;
     max-width: 300px;
-    width: 268px;
+    width: 290px;
 }
 .config-text:hover>.popover {
     display: block;
 }
 .popover-body {
     padding: 0.2rem;
+}
+.edit-bx:hover {
+    color: #4D95CD;
+    cursor: pointer;
+}
+.edit-row {
+    padding: 2px 10px;
+}
+.edit-row:nth-child(odd) {
+    background: rgb(247, 247, 247);
 }

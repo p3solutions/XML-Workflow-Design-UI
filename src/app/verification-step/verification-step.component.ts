@@ -41,6 +41,7 @@ export class VerificationStepComponent implements OnInit {
     progressBar.classList.add('width-100');
     progressBar.classList.remove('width-66');
     const navProgress = document.querySelectorAll('#navbarNav li.nav-item');
+    navProgress[1].classList.add('active');
     navProgress[2].classList.add('active');
   }
 
