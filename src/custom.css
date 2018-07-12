@@ -1,4 +1,7 @@
 /* delete feature css */
+a {
+  color: #4D95CD;
+}
 .hide {
   display: none;
 }
@@ -29,6 +32,18 @@
 .p-t-0 {
   padding-top: 0!important;
 }
+.p-l-0 {
+  padding-left: 0!important;
+}
+.p-b-0 {
+  padding-bottom: 0!important;
+}
+.p-r-0 {
+  padding-right: 0!important;
+}
+.br-5 {
+  border-radius: 5px!important;
+}
 .trim-text {
   display: inline-block;
   white-space: nowrap;
@@ -38,6 +53,11 @@
 .scrollable-height {
   min-height: 300px;
   overflow: auto;
+}
+.card:last-of-type {
+  border-bottom-style: solid!important;
+  border-bottom-width: 1px!important;
+  border-color: rgba(0, 0, 0, 0.125)!important;
 }
 .card-header-ht {
   height: 55px;
@@ -90,11 +110,15 @@
   padding:2px 5px
 }
 .attr-icon {
-  margin: 0px 2px 0px 5px;
-  font-size: 14px;
   color: #4D95CD;
+  border-radius: 3px;
+  font-size: 12px;
+  border: 1px solid #4D95CD;
+  padding: 0px 4px 0px;
 }
-
+.attr-a {
+  padding: 0px 2px 1px;
+}
 /**** Iphone ****/
 /* 
 @media (max-width: 414px) {

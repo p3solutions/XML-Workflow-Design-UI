@@ -13,20 +13,20 @@
     <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"
       (copyNode)="onCopyNode($event)" (toggleExpanded)="onToggleExpanded($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
-        <fa *ngIf="node.isAttribute" name="at fa-lg attr-icon"></fa>
-        <fa *ngIf="!node.isAttribute" name="code fa-lg attr-icon"></fa>
+        <span *ngIf="node.isAttribute" class="attr-icon attr-a">@</span>
+        <span *ngIf="!node.isAttribute" class="attr-icon">e</span>
         <span class="config-text" [ngClass]="{'selected-to-delete': node.isSelected}">
           <span tabindex="0" role="button" id="{{node.data.id}}">{{ node.data.name }}</span>
           <div class="popover hide">
             <div class="arrow"></div>
             <div class="popover-body">
               <span class="tree-chkbx">Search
-                <input type="checkbox" [(ngModel)]="node.data.search">
+                <input type="checkbox" [(ngModel)]="node.data.search" (change)="saveTree()">
               </span>
               <span class="tree-chkbx">Result
-                <input type="checkbox" [(ngModel)]="node.data.result">
+                <input type="checkbox" [(ngModel)]="node.data.result" (change)="saveTree()">
               </span>
-              <select [(ngModel)]="node.data.datatype" class="tree-chkbx">
+              <select [(ngModel)]="node.data.datatype" class="tree-chkbx" (change)="saveTree()">
                 <option value="STRING">String</option>
                 <option value="INTEGER">Integer</option>
                 <option value="LONG">Long</option>
@@ -82,66 +82,140 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="row edit-row">
-          <div class="col">
-            <span class="tree-chkbx">Mandatory
-            </span>
+      <div class="modal-body p-r-0 p-l-0">
+        <div class="property-row-div col-md-12">
+          <div class="row edit-row">
+              <div class="col">
+                <span class="tree-chkbx">Tag name
+                </span>
+              </div>
+              <div class="col">
+                <input *ngIf="selectedNode.id === 1" type="text" placeholder="{{selectedNode.data.name}}"
+                  [(ngModel)]="nodes[0].name" (change)="saveTree()">
+                <label *ngIf="selectedNode.id !== 1">{{selectedNode.data.name}}</label>
+              </div>
+            </div>
+          <div class="row edit-row">
+            <div class="col">
+              <span class="tree-chkbx">Mandatory
+              </span>
+            </div>
+            <div class="col">
+              <input type="checkbox" id="selected-node-min" [checked]="(selectedNode.data.minoccurance === '1')" 
+                (change)="handleMin()">
+            </div>
           </div>
-          <div class="col">
-            <input type="checkbox" id="selected-node-min" [checked]="(selectedNode.data.minoccurance === '1')" 
-              (change)="handleMin()">
+          <div class="row edit-row">
+            <div class="col">
+              <span class="tree-chkbx">Repetitive
+              </span>
+            </div>
+            <div class="col">
+              <input type="checkbox" id="selected-node-max" [checked]="selectedNode.data.maxoccurance === 'unbound'" 
+                (change)="handleMax()">
+            </div>
+          </div>
+          <div class="row edit-row">
+            <div class="col">
+              <span class="tree-chkbx">Search
+              </span>
+            </div>
+            <div class="col">
+              <input type="checkbox" [(ngModel)]="selectedNode.data.search" (change)="saveTree()">
+            </div>
+          </div>
+          <div class="row edit-row">
+            <div class="col">
+              <span class="tree-chkbx">Result
+              </span>
+            </div>
+            <div class="col">
+              <input type="checkbox" [(ngModel)]="selectedNode.data.result" (change)="saveTree()">
+            </div>
+          </div>
+          <div class="row edit-row">
+            <div class="col">
+              <span class="tree-chkbx">Data type
+              </span>
+            </div>
+            <div class="col">
+              <select class="conditional-drop-down tree-chkbx" [(ngModel)]="selectedNode.data.datatype" (change)="saveTree()">
+                <option value="STRING">String</option>
+                <option value="INTEGER">Integer</option>
+                <option value="LONG">Long</option>
+                <option value="DOUBLE">Double</option>
+                <option value="DATE">Date</option>
+                <option value="DATETIME">DateTime</option>
+              </select>
+            </div>
+          </div>
+          <div class="row edit-row">
+            <div class="col">
+              <span class="tree-chkbx">Is condition
+              </span>
+            </div>
+            <div class="col">
+              <input type="checkbox" [(ngModel)]="selectedNode.data.iscondition" (change)="conditionalCheck($event)">
+            </div>
           </div>
         </div>
-        <div class="row edit-row">
-          <div class="col">
-            <span class="tree-chkbx">Repetitive
-            </span>
-          </div>
-          <div class="col">
-            <input type="checkbox" id="selected-node-max" [checked]="selectedNode.data.maxoccurance === 'unbound'" 
-              (change)="handleMax()">
+        <div class="m-10">
+          <div class="accordion" id="condition-div">
+            <div class="card br-5">
+              <div class="card-header p-0" id="condition-div-heading">
+                <h5 class="mb-0">
+                  <button class="btn btn-link accordion-link collapsed" type="button" data-toggle="collapse" data-target="#collapse-condition-div" aria-expanded="false" aria-controls="collapse-condition-div">
+                    <strong>Conditions</strong>
+                    <!-- <span class="pull-right">
+                      <i class="fa fa-caret-up accordion-coll-hide pull-left" aria-hidden="true"></i>
+                      <i class="fa fa-caret-down accordion-coll-show pull-left" aria-hidden="true"></i>
+                    </span> -->
+                  </button>
+                </h5>
+              </div>
+            <div id="collapse-condition-div" class="collapse" aria-labelledby="condition-div-heading" data-parent="#condition-div">
+              <div class="card-body">
+                <div class="row edit-row">
+                  <div class="col">
+                    <span class="tree-chkbx">Condition path
+                    </span>
+                  </div>
+                  <div class="col">
+                    <select class="conditional-drop-down" [(ngModel)]="selectedNode.data.conditionpath" >
+                      <option value="">Select</option>
+                      <option  *ngFor="let selectedCondition of selectedConditionArray" value="{{selectedCondition}}">{{selectedCondition}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row edit-row">
+                  <div class="col">
+                    <span class="tree-chkbx">Condition
+                    </span>
+                  </div>
+                  <div class="col">
+                      <select class="conditional-drop-down" [(ngModel)]="selectedNode.data.condition" >
+                        <option value="">Select</option>
+                        <option value="=">Equal</option>
+                      </select>
+                  </div>
+                </div>
+                <div class="row edit-row">
+                  <div class="col">
+                    <span class="tree-chkbx">Condition value
+                    </span>
+                  </div>
+                  <div class="col">
+                    <input type="text" [(ngModel)]="selectedNode.data.conditionvalue">
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
-        <div class="row edit-row">
-          <div class="col">
-            <span class="tree-chkbx">Search
-            </span>
-          </div>
-          <div class="col">
-            <input type="checkbox" [(ngModel)]="selectedNode.data.search">
-          </div>
-        </div>
-        <div class="row edit-row">
-          <div class="col">
-            <span class="tree-chkbx">Result
-            </span>
-          </div>
-          <div class="col">
-            <input type="checkbox" [(ngModel)]="selectedNode.data.result">
-          </div>
-        </div>
-        <div class="row edit-row">
-          <div class="col">
-            <span class="tree-chkbx">Data Type
-            </span>
-          </div>
-          <div class="col">
-            <select class="tree-chkbx" [(ngModel)]="selectedNode.data.datatype" >
-              <option value="STRING">String</option>
-              <option value="INTEGER">Integer</option>
-              <option value="LONG">Long</option>
-              <option value="DOUBLE">Double</option>
-              <option value="DATE">Date</option>
-              <option value="DATETIME">DateTime</option>
-            </select>
-          </div>
-        </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary cancel" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="savePropertyChanges()">Save</button>
+        <div class="modal-footer">
+        <!-- <button type="button" class="btn btn-primary cancel" data-dismiss="modal">Cancel</button> -->
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="savePropertyChanges()">OK</button>
       </div>
     </div>
   </div>    

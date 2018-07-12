@@ -64,3 +64,25 @@
 .edit-row:nth-child(odd) {
     background: rgb(247, 247, 247);
 }
+.accordion-link .collapsed .accordion-coll-show {
+    display: block;
+}
+.accordion-link .collapsed .accordion-coll-hide {
+    display: none;
+}
+.accordion-link .accordion-coll-show {
+    display: none;
+}
+.accordion-link .accordion-coll-hide {
+    display: block;
+}
+.accordion .accordion-link {
+    color: #4D95CD;
+    cursor: pointer;
+}
+.conditional-drop-down {
+    max-width: 175px;
+}
+.property-row-div {
+    border-bottom: 1px solid #e9ecef;
+}

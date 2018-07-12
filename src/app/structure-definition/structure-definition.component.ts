@@ -66,6 +66,8 @@ export class StructureDefinitionComponent implements OnInit {
   };
   deleteNode: any = {};
   selectedNode: any;
+  selectedConditionList = new Map();
+  selectedConditionArray = [];
   constructor() { }
 
   ngOnInit() {
@@ -226,7 +228,6 @@ export class StructureDefinitionComponent implements OnInit {
     }, 10);
   }
   savePropertyChanges() {
-    console.log(this.selectedNode.data);
     this.saveTree();
     this.selectedNode = null;
   }
@@ -237,6 +238,7 @@ export class StructureDefinitionComponent implements OnInit {
     } else {
       this.selectedNode.data.minoccurance = '0';
     }
+    this.saveTree();
   }
   handleMax() {
     const selectedNodeMinValue  = $('#selected-node-max').is(':checked');
@@ -245,6 +247,18 @@ export class StructureDefinitionComponent implements OnInit {
     } else {
       this.selectedNode.data.maxoccurance = '';
     }
+    this.saveTree();
+  }
+  conditionalCheck($event) {
+    const target = $event.target;
+    const isChecked = target.checked;
+    if (isChecked) {
+      this.selectedConditionList.set(this.selectedNode.id, this.selectedNode.data.frompath);
+    } else {
+      this.selectedConditionList.delete(this.selectedNode.id);
+    }
+    this.selectedConditionArray = Array.from(this.selectedConditionList.values());
+    this.saveTree();
   }
 }
 
