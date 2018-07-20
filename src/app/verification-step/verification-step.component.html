@@ -19,9 +19,11 @@
     </div>
   </div>
   <div class="col-md-2">
-    <button type="button" class="btn btn-secondary submit-btn m-20" style="display: none;">Generate PDI Metadata</button>
-    <button type="button" class="btn btn-secondary submit-btn" (click)="downloadFile()">Generate WorkFlow
-      <fa *ngIf="loader" name="spinner fa-spin"></fa>
+    <button type="button" class="btn btn-secondary submit-btn m-b-10" (click)="downloadPDIfile()">Generate PDI File
+      <fa *ngIf="pdiLoader" name="spinner fa-spin"></fa>
+    </button>
+    <button type="button" class="btn btn-secondary submit-btn" (click)="downloadJSONfile()">Generate WorkFlow
+      <fa *ngIf="jsonLoader" name="spinner fa-spin"></fa>
     </button>
   </div>
 </div>
