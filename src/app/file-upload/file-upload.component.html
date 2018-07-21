@@ -6,7 +6,7 @@
       <form [formGroup]="fileUploadForm">
         <button type="button" class="btn btn-secondary browse-btn" onclick="document.getElementById('upload-btn').click()">Upload files</button>
         <input id="upload-btn" type="file" name="file-input" multiple required formControlName="fileUpload" placeholder="Select File" (change)="onFileUpload($event.target.files)"
-          class="hide btn btn-secondary browse-btn">
+          class="hide btn btn-secondary browse-btn" accept=".xml">
       </form>
     </div>
     <div class="row">
