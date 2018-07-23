@@ -4,6 +4,7 @@ import { TreeViewService } from './tree-view.service';
 import { TreeViewModel } from './tree-model';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { CommonFnService } from '../common-fn.service';
 
 @Component({
   selector: 'app-tree-view',
@@ -29,17 +30,18 @@ export class TreeViewComponent implements OnInit, OnChanges {
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
             TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
-            this.colorRHStree();
           }
         }
       },
     }
   };
   tree: any;
+  lhsTreeNodeSelector = '.lhs-tree .node-wrapper';
   constructor(
     private route: ActivatedRoute,
-    private treeViewService: TreeViewService
-  ) { }
+    private treeViewService: TreeViewService,
+    private commonFnService: CommonFnService
+  ) {}
 
   ngOnInit() {
     this.getData();
@@ -48,49 +50,28 @@ export class TreeViewComponent implements OnInit, OnChanges {
   getData() {
     this.tree = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
-        console.log(params.get('name'));
         return this.treeViewService.getTree(params.get('name'));
       })
     );
     this.tree.subscribe(data => {
-      console.log(data);
       this.nodes = data;
-      console.log(this.nodes.data.treeview);
     });
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     for (const propName in changes) {
       if (propName) {
-        console.log(changes[propName].currentValue);
+        console.log('ngOnChanges', changes[propName].currentValue);
       }
     }
   }
-  colorRHStree() {
-    $('.lhs-tree .node-wrapper').each((i, el) => {
-      let color = '#FFFFFF';
-      if (i % 2 === 0) {
-        color = '#F7F7F7';
-      }
-      $(el).css({ 'background': color });
-    });
+  colorCurrentTree() {
+    this.commonFnService.colorTree(this.lhsTreeNodeSelector);
   }
   onToggle() {
-    setTimeout(this.colorRHStree, 10);
-  }
-  expandNode(node) {
-    if (!node.isExpanded && node.hasChildren) {
-      node.expand();
-      node.setActiveAndVisible();
-    }
+    this.colorCurrentTree();
   }
   onInitialized(_event) {
-    setTimeout(() => { // instantly root is not available hence using setTimeout
-      if (_event.treeModel && _event.treeModel.roots &&
-        _event.treeModel.roots[0]) {
-        this.expandNode(_event.treeModel.roots[0]);
-      }
-      this.colorRHStree();
-    }, 100);
+    this.commonFnService.onInitialized(_event, this.lhsTreeNodeSelector);
   }
 }

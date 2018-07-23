@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { TreeNode, TreeModel, TREE_ACTIONS, ITreeOptions } from 'angular-tree-component';
+import { CommonFnService } from '../common-fn.service';
 
 @Component({
   selector: 'app-structure-definition',
@@ -47,16 +48,14 @@ export class StructureDefinitionComponent implements OnInit {
           copiedFrom._getParentsChildren = from._getParentsChildren;
           copiedFrom.getIndexInParent = from.getIndexInParent;
           tree.copyNode(copiedFrom, to);
-          console.log(from, copiedFrom);
           tree.update();
           this.saveTree();
           this.expandNode(to.parent);
-          setTimeout(this.colorRHStree, 10);
+          this.colorCurrentTree();
         },
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
             TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
-            this.colorRHStree();
             // this.highlightedSelected($event.target, node);
             this.enableDisableMultiDeleteButton();
           }
@@ -68,7 +67,10 @@ export class StructureDefinitionComponent implements OnInit {
   selectedNode: any;
   selectedConditionList = new Map();
   selectedConditionArray = [];
-  constructor() { }
+  rhsTreeNodeSelector = '.rhs-tree .node-wrapper';
+  constructor(
+    private commonFnService: CommonFnService
+  ) { }
 
   ngOnInit() {
     const configuration = JSON.parse(localStorage.getItem('configuration'));
@@ -80,7 +82,6 @@ export class StructureDefinitionComponent implements OnInit {
   saveTree() {
     localStorage.setItem('configuration', JSON.stringify(this.nodes));
   }
-
   search(event: Event) {
     console.log(event);
   }
@@ -90,33 +91,19 @@ export class StructureDefinitionComponent implements OnInit {
   dataType(event: Event) {
     console.log(event);
   }
-  colorRHStree() {
-    $('.rhs-tree .node-wrapper').each((i, el) => {
-      let color = '#FFFFFF';
-      if (i % 2 === 0) {
-              color = '#F7F7F7';
-          }
-      $(el).css({'background': color});
-    });
-  }
-  onToggle() {
-    setTimeout(this.colorRHStree, 10);
-  }
   expandNode(node) {
-    if (!node.isExpanded && node.hasChildren) {
-      node.expand();
-      node.setActiveAndVisible();
-    }
+    this.commonFnService.expandNode(node);
+  }
+  colorCurrentTree() {
+    this.commonFnService.colorTree(this.rhsTreeNodeSelector);
   }
   onInitialized(_event) {
-    const rootNode = _event.treeModel.roots[0];
-    this.expandNode(rootNode);
-    this.colorRHStree();
+    this.commonFnService.onInitialized(_event, this.rhsTreeNodeSelector);
   }
   onCopyNode(_event) {
     const copiedNode = _event.treeModel.getNodeById(_event.node.id);
     this.expandNode(copiedNode.parent);
-    this.colorRHStree();
+    this.colorCurrentTree();
   }
 
   handleSingleMultiDelete() {
@@ -155,7 +142,7 @@ export class StructureDefinitionComponent implements OnInit {
       this.deleteNode = {};
       if (singleDelete) {
         this.saveTree();
-        this.colorRHStree();
+        this.colorCurrentTree();
       }
     }
     this.enableDisableMultiDeleteButton();
@@ -184,7 +171,7 @@ export class StructureDefinitionComponent implements OnInit {
     });
     tree.update();
     this.saveTree();
-    this.colorRHStree();
+    this.colorCurrentTree();
     this.deleteProgress = false;
   }
   enableDisableMultiDeleteButton() {
@@ -192,7 +179,7 @@ export class StructureDefinitionComponent implements OnInit {
       $('.tree-node-checkbox').is(':checked') ? (this.enableDelete = true) : (this.enableDelete = false);
     }, 100);
   }
-  onToggleExpanded($event) {
+  onToggle($event) {
     this.enableDisableMultiDeleteButton();
     if ($event.isExpanded) {
       setTimeout(() => {
@@ -207,6 +194,7 @@ export class StructureDefinitionComponent implements OnInit {
         // });
       }, 100);
     }
+    this.colorCurrentTree();
   }
   highlightedSelected(target, node) {
     const targetDiv = $(target).parents('.tree-node')[0];
