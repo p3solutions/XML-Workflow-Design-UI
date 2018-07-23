@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ITreeOptions, TREE_ACTIONS } from 'angular-tree-component';
 import { FileUploadService } from '../file-upload/file-upload.service';
+import { CommonFnService } from '../common-fn.service';
 
 @Component({
   selector: 'app-verification-step',
@@ -17,7 +18,6 @@ export class VerificationStepComponent implements OnInit {
         dblClick: (tree, node, $event) => {
           if (node.hasChildren) {
             TREE_ACTIONS.TOGGLE_EXPANDED(tree, node, $event);
-            this.colorRHStree();
           }
         }
       },
@@ -29,8 +29,10 @@ export class VerificationStepComponent implements OnInit {
   xsdFileName = 'pdi-schema.xsd';
   jsonFileType = 'text/json';
   xsdFileType = 'text/xml';
+  treeNodeSelector = '.verify-tree .node-wrapper';
   constructor(
-    private fileUploadService: FileUploadService
+    private fileUploadService: FileUploadService,
+    private commonFnService: CommonFnService
   ) { }
 
   ngOnInit() {
@@ -52,33 +54,14 @@ export class VerificationStepComponent implements OnInit {
     navProgress[1].classList.add('active');
     navProgress[2].classList.add('active');
   }
-
-  colorRHStree() {
-    $('.node-wrapper').each((i, el) => {
-      let color = '#FFFFFF';
-      if (i % 2 === 0) {
-              color = '#F7F7F7';
-          }
-      $(el).css({'background': color});
-    });
+  colorCurrentTree() {
+    this.commonFnService.colorTree(this.treeNodeSelector);
   }
   onToggle() {
-    setTimeout(this.colorRHStree, 10);
-  }
-  expandNode(node) {
-    if (!node.isExpanded && node.hasChildren) {
-      node.expand();
-      node.setActiveAndVisible();
-    }
+    this.colorCurrentTree();
   }
   onInitialized(_event) {
-    setTimeout( () => {
-    if (_event.treeModel && _event.treeModel.roots &&
-      _event.treeModel.roots[0]) {
-        this.expandNode(_event.treeModel.roots[0]);
-      }
-      this.colorRHStree();
-    }, 100);
+    this.commonFnService.onInitialized(_event, this.treeNodeSelector);
   }
   downloadFile(content, fileName, fileType) {
     const type = fileType || 'text';
@@ -96,7 +79,7 @@ export class VerificationStepComponent implements OnInit {
     if (!dataStr || dataStr.length === 0) {
       console.log('Error! Can\'t find parsed data.');
       loader = false;
-      return false;
+      return null;
     }
     const dataArray = JSON.parse(dataStr);
     const fileObj = { 'result': dataArray[0] };
@@ -113,19 +96,25 @@ export class VerificationStepComponent implements OnInit {
   downloadJSONfile() {
     this.jsonLoader = true;
     const jsonFileObj = this.getJsonFileObj(this.jsonLoader, this.jsonOutputFileName, this.jsonFileType);
-    this.downloadFile(jsonFileObj.data, jsonFileObj.name, jsonFileObj.type);
+    if (jsonFileObj !== null) {
+      this.downloadFile(jsonFileObj.data, jsonFileObj.name, jsonFileObj.type);
+    }
     this.jsonLoader = false;
   }
   downloadPDIfile() {
     this.pdiLoader = true;
     const jsonFileObj = this.getJsonFileObj(this.pdiLoader, this.jsonOutputFileName, this.jsonFileType);
-    this.fileUploadService.generatePDI(new File([jsonFileObj.data], jsonFileObj.name)).subscribe( res => {
-      this.fileUploadService.getPDIfile().subscribe(blob => {
-        this.downloadFile(blob, this.xsdFileName, this.xsdFileType);
-        this.pdiLoader = false;
+    if (jsonFileObj !== null) {
+      this.fileUploadService.generatePDI(new File([jsonFileObj.data], jsonFileObj.name)).subscribe( res => {
+        this.fileUploadService.getPDIfile().subscribe(blob => {
+          this.downloadFile(blob, this.xsdFileName, this.xsdFileType);
+          this.pdiLoader = false;
+        });
+      }, (e) => {
+        console.log('ERROR', e);
       });
-    }, (e) => {
-      console.log('ERROR', e);
-    });
+    } else {
+      this.pdiLoader = false;
+    }
   }
 }

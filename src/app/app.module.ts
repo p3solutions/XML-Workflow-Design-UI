@@ -3,16 +3,14 @@ import { NgModule } from '@angular/core';
 import { FileDropModule } from 'ngx-file-drop';
 import { DataTablesModule } from 'angular-datatables';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+// import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ReactiveFormsModule } from '@angular/forms';
-import { InMemoryDataService } from './in-memory-data/in-memory-data.service';
+// import { InMemoryDataService } from './in-memory-data/in-memory-data.service';
 import { TreeModule } from 'angular-tree-component';
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
-
-
 import { AppComponent } from './app.component';
 import { FileUploadComponent } from './file-upload/file-upload.component';
 import { HeaderBarComponent } from './header-bar/header-bar.component';
@@ -25,6 +23,7 @@ import { DefinitionStepComponent } from './definition-step/definition-step.compo
 import { VerificationStepComponent } from './verification-step/verification-step.component';
 import { StructureDefinitionComponent } from './structure-definition/structure-definition.component';
 import { FileUploadService } from './file-upload/file-upload.service';
+import { CommonFnService } from './common-fn.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +55,7 @@ import { FileUploadService } from './file-upload/file-upload.service';
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
   ],
-  providers: [FileUploadService],
+  providers: [FileUploadService, CommonFnService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
