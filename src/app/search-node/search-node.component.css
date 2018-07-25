@@ -1,0 +1,29 @@
+.search-node-div {
+    height: 30px;
+    height: 30px;
+    margin-top: -20px;
+    position: absolute;
+    z-index: 100;
+}
+
+.search-node-div .search-icon {
+    position: absolute;
+    margin: 5px;
+    cursor: pointer;
+}
+.search-node-div .search-input {
+    padding: 1px 1px 1px 30px;
+    border: none;
+    width: 100%;
+    background: transparent;
+    font-weight: bold;
+}
+.search-node-div .search-input-div {
+    display: none;
+}
+.search-node-div.expand .search-input-div {
+    display: block;
+}
+.search-node-div.expand .search-icon {
+    color: #4D95CD;
+}

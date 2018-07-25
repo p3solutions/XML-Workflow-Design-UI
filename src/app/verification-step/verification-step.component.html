@@ -5,12 +5,13 @@
         Final structure to be generated:
       </div>
       <div class="card-body scrollable-height verify-tree">
-        <tree-root [nodes]="nodes ? nodes : null" [options]="options"
+        <app-search-node [nodeArray]="nodes" [searchContainerSelector]="'.verify-tree'"></app-search-node>
+        <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options"
           (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)">
           <ng-template #treeNodeTemplate let-node let-index="index">
               <span *ngIf="node.isAttribute" class="attr-icon">@</span>
               <span *ngIf="!node.isAttribute" class="attr-icon">e</span>
-              <span class="config-text" [ngClass]="{'selected-to-delete': node.isSelected}">
+              <span class="config-text node-name" [ngClass]="{'selected-to-delete': node.isSelected, 'alert-warning': node.stringMatched}">
                 <span tabindex="0" role="button" id="node-{{node.data.id}}">{{ node.data.name }}</span>
               </span>
           </ng-template>

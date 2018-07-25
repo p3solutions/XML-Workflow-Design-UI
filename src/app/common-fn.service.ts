@@ -40,4 +40,9 @@ export class CommonFnService {
     };
     const intervalFnId = setInterval(checkRoot, 100);
   }
+
+  getAllNodes(tree) {
+    console.log('getAllNodes', tree);
+    return tree;
+  }
 }

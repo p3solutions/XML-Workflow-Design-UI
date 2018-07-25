@@ -24,6 +24,7 @@ import { VerificationStepComponent } from './verification-step/verification-step
 import { StructureDefinitionComponent } from './structure-definition/structure-definition.component';
 import { FileUploadService } from './file-upload/file-upload.service';
 import { CommonFnService } from './common-fn.service';
+import { SearchNodeComponent } from './search-node/search-node.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { CommonFnService } from './common-fn.service';
     FileUploadStepComponent,
     DefinitionStepComponent,
     VerificationStepComponent,
-    StructureDefinitionComponent
+    StructureDefinitionComponent,
+    SearchNodeComponent
   ],
   imports: [
     BrowserModule,
