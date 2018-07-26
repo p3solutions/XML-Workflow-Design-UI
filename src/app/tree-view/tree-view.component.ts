@@ -35,7 +35,7 @@ export class TreeViewComponent implements OnInit, OnChanges {
       },
     }
   };
-  tree: any;
+  treeSeed: any;
   lhsTreeNodeSelector = '.lhs-tree .node-wrapper';
   constructor(
     private route: ActivatedRoute,
@@ -44,16 +44,16 @@ export class TreeViewComponent implements OnInit, OnChanges {
   ) {}
 
   ngOnInit() {
-    this.getData();
+      this.getData();
   }
 
   getData() {
-    this.tree = this.route.paramMap.pipe(
+    this.treeSeed = this.route.paramMap.pipe(
       switchMap((params: ParamMap) => {
         return this.treeViewService.getTree(params.get('name'));
       })
     );
-    this.tree.subscribe(data => {
+    this.treeSeed.subscribe(data => {
       this.nodes = data;
     });
   }
@@ -65,13 +65,16 @@ export class TreeViewComponent implements OnInit, OnChanges {
       }
     }
   }
+  onInitialized(_event) {
+    this.commonFnService.onInitialized(_event, this.lhsTreeNodeSelector);
+  }
   colorCurrentTree() {
-    this.commonFnService.colorTree(this.lhsTreeNodeSelector);
+    this.commonFnService.colorTreeLater(this.lhsTreeNodeSelector);
   }
   onToggle() {
     this.colorCurrentTree();
   }
-  onInitialized(_event) {
-    this.commonFnService.onInitialized(_event, this.lhsTreeNodeSelector);
+  onFiltered() {
+    this.colorCurrentTree();
   }
 }

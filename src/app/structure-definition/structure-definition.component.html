@@ -10,8 +10,9 @@
     </div>
   </div>
   <div class="card-body scrollable-height rhs-tree">
-    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle($event)" (initialized)="onInitialized($event)"
-      (copyNode)="onCopyNode($event)">
+    <app-search-node [nodeTree]="tree" [searchContainerSelector]="'.rhs-tree'"></app-search-node>
+    <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle($event)"
+      (initialized)="onInitialized($event)" (copyNode)="onCopyNode($event)" (changeFilter)="onFiltered($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
         <span *ngIf="node.isAttribute" class="attr-icon attr-a">@</span>
         <span *ngIf="!node.isAttribute" class="attr-icon">e</span>

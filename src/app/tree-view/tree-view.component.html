@@ -1,10 +1,11 @@
-<tree-root [nodes]="nodes?.data?.treeview?.fileValue?.tree"
- [options]="options" (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)">
+<app-search-node [nodeTree]="tree" [searchContainerSelector]="'.lhs-tree'"></app-search-node>
+<tree-root #tree [nodes]="nodes?.data?.treeview?.fileValue?.tree" [options]="options" (toggleExpanded)="onToggle()" 
+(initialized)="onInitialized($event)" (changeFilter)="onFiltered()">
     <ng-template #treeNodeTemplate let-node let-index="index">
         <span *ngIf="node.isAttribute" class="attr-icon">@</span>
         <span *ngIf="!node.isAttribute" class="attr-icon">e</span>
         <span class="config-text" [ngClass]="{'selected-to-delete': node.isSelected}">
-          <span tabindex="0" role="button" id="node-{{node.data.id}}">{{ node.data.name }}</span>
+            <span tabindex="0" role="button" id="node-{{node.data.id}}">{{ node.data.name }}</span>
         </span>
     </ng-template>
 </tree-root>

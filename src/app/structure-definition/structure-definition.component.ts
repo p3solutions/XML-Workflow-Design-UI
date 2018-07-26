@@ -95,7 +95,7 @@ export class StructureDefinitionComponent implements OnInit {
     this.commonFnService.expandNode(node);
   }
   colorCurrentTree() {
-    this.commonFnService.colorTree(this.rhsTreeNodeSelector);
+    this.commonFnService.colorTreeLater(this.rhsTreeNodeSelector);
   }
   onInitialized(_event) {
     this.commonFnService.onInitialized(_event, this.rhsTreeNodeSelector);
@@ -158,7 +158,7 @@ export class StructureDefinitionComponent implements OnInit {
       }
     }
     targetIdsArray.forEach(idStr => {
-      const target = $('#' + idStr);
+      const target = $('#node-' + idStr);
       if (target.length > 0) {
         this.deleteNode.targetNode = target.parents('tree-node')[0];
         this.deleteNode.targetNodeWrapper = target.parents('tree-node-wrapper');
@@ -170,8 +170,8 @@ export class StructureDefinitionComponent implements OnInit {
       }
     });
     tree.update();
-    this.saveTree();
     this.colorCurrentTree();
+    this.saveTree();
     this.deleteProgress = false;
   }
   enableDisableMultiDeleteButton() {
@@ -181,19 +181,19 @@ export class StructureDefinitionComponent implements OnInit {
   }
   onToggle($event) {
     this.enableDisableMultiDeleteButton();
-    if ($event.isExpanded) {
-      setTimeout(() => {
-        const children = [];
-        for (let i = 0; i < $event.node.children.length; i++) {
-          children.push($event.node.children[i]);
-        }
-        // children.forEach( (child) => {
-        //   const childDOM = $('#' + child.id);
-        //   // console.log('onToggleExpanded', childDOM, child);
-        //   this.highlightedSelected(childDOM, child);
-        // });
-      }, 100);
-    }
+    // if ($event.isExpanded) {
+    //   setTimeout(() => {
+    //     const children = [];
+    //     for (let i = 0; i < $event.node.children.length; i++) {
+    //       children.push($event.node.children[i]);
+    //     }
+      //   children.forEach( (child) => {
+      //     const childDOM = $('#' + child.id);
+      //     // console.log('onToggleExpanded', childDOM, child);
+      //     this.highlightedSelected(childDOM, child);
+      //   });
+      // }, 100);
+    // }
     this.colorCurrentTree();
   }
   highlightedSelected(target, node) {
@@ -247,6 +247,9 @@ export class StructureDefinitionComponent implements OnInit {
     }
     this.selectedConditionArray = Array.from(this.selectedConditionList.values());
     this.saveTree();
+  }
+  onFiltered(e) {
+    this.colorCurrentTree();
   }
 }
 

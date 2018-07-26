@@ -1,10 +1,7 @@
 <div id="search-node-div" class="search-node-div">
-  <i aria-hidden="true" class="fa fa-search search-icon" (click)="toggleInputBox()"></i>
+  <i aria-hidden="true" class="fa fa-search search-icon"></i>
   <div class="search-input-div">
-    <input class="search-input" placeholder="Search node" list="node-list" 
-      [(ngModel)]="keyword" (keyup)="searchNode($event, false)" (change)="searchNode($event, true)"/>
-    <datalist id="node-list">
-      <option *ngFor="let node of nodeArray" value="{{node.name}}">{{node.name}}</option>
-    </datalist>
+    <input #filter (keyup)="filterNodes(filter.value, $event)" placeholder="Filter nodes"
+    class="search-input btn"/>
   </div>
 </div>

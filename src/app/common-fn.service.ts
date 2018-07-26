@@ -7,22 +7,18 @@ export class CommonFnService {
     secondary: '#FFFFFF'
   };
   backgroundAttr = 'background';
+  currentTreeSelector = '';
+  delayFn = (function() {
+    let timer = 0;
+    return function(callback, ms) {
+      clearTimeout (timer);
+      timer = setTimeout(callback, ms);
+    };
+  })();
+  defaultInterval = 1000;
 
   constructor() { }
 
-  colorTree(selector) {
-    setTimeout( () => {
-      $(selector).each((i, el) => {
-        let color = this.bgColor.secondary;
-        if (i % 2 === 0) {
-          color = this.bgColor.primary;
-        }
-        const styleObj = {};
-        styleObj[this.backgroundAttr] = color;
-        $(el).css(styleObj);
-      });
-    }, 100);
-  }
   expandNode(node) {
     if (!node.isExpanded && node.hasChildren) {
       node.expand();
@@ -35,14 +31,41 @@ export class CommonFnService {
         _event.treeModel.roots.length > 0) {
         this.expandNode(_event.treeModel.roots[0]);
         clearInterval(intervalFnId);
-        this.colorTree(selector);
+        this.colorTreeWithDelay(selector, 10);
       }
     };
     const intervalFnId = setInterval(checkRoot, 100);
   }
 
-  getAllNodes(tree) {
-    console.log('getAllNodes', tree);
-    return tree;
+  toggleInputBox(containerSelector) {
+    const _selector = $(containerSelector).length > 0 ? $(containerSelector + ' .search-node-div') : $('.search-node-div');
+    const isExpanded = _selector.hasClass('expand');
+    const inputBox = $(containerSelector + ' .search-input');
+    if (isExpanded) {
+      _selector.removeClass('expand');
+      inputBox.val('').keyup();
+
+    } else {
+      _selector.addClass('expand');
+      inputBox.focus();
+    }
+  }
+  colorTreeLater(selector) {
+    this.colorTreeWithDelay(selector, this.defaultInterval);
+  }
+  colorTreeWithDelay(selector, ms) {
+    const bgColor = this.bgColor;
+    const backgroundAttr = this.backgroundAttr;
+    this.delayFn(() => {
+      $(selector).each((i, el) => {
+        let color = bgColor.secondary;
+        if (i % 2 === 0) {
+          color = bgColor.primary;
+        }
+        const styleObj = {};
+        styleObj[backgroundAttr] = color;
+        $(el).css(styleObj);
+      });
+    }, ms);
   }
 }

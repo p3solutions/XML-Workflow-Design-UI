@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ITreeOptions, TREE_ACTIONS } from 'angular-tree-component';
+import { ITreeOptions, TREE_ACTIONS, ITreeState } from 'angular-tree-component';
 import { FileUploadService } from '../file-upload/file-upload.service';
 import { CommonFnService } from '../common-fn.service';
 
@@ -55,7 +55,7 @@ export class VerificationStepComponent implements OnInit {
     navProgress[2].classList.add('active');
   }
   colorCurrentTree() {
-    this.commonFnService.colorTree(this.treeNodeSelector);
+    this.commonFnService.colorTreeLater(this.treeNodeSelector);
   }
   onToggle() {
     this.colorCurrentTree();
@@ -116,5 +116,8 @@ export class VerificationStepComponent implements OnInit {
     } else {
       this.pdiLoader = false;
     }
+  }
+  onFiltered() {
+    this.colorCurrentTree();
   }
 }

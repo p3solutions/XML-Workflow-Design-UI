@@ -57,6 +57,12 @@ a {
   min-height: 300px;
   overflow: auto;
 }
+.scrollable-height.card-body {
+  padding: 10px 20px;
+}
+.scrollable-height tree-viewport {
+  height: 500px;
+}
 .card:last-of-type {
   border-bottom-style: solid!important;
   border-bottom-width: 1px!important;
@@ -122,6 +128,7 @@ a {
 .attr-a {
   padding: 0px 2px 1px;
 }
+
 /**** Iphone ****/
 /* 
 @media (max-width: 414px) {

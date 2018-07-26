@@ -5,9 +5,9 @@
         Final structure to be generated:
       </div>
       <div class="card-body scrollable-height verify-tree">
-        <app-search-node [nodeArray]="nodes" [searchContainerSelector]="'.verify-tree'"></app-search-node>
-        <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options"
-          (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)">
+        <app-search-node [nodeTree]="tree" [searchContainerSelector]="'.verify-tree'"></app-search-node>
+        <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()"
+          (initialized)="onInitialized($event)" (changeFilter)="onFiltered()">
           <ng-template #treeNodeTemplate let-node let-index="index">
               <span *ngIf="node.isAttribute" class="attr-icon">@</span>
               <span *ngIf="!node.isAttribute" class="attr-icon">e</span>
