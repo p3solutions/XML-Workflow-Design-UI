@@ -29,7 +29,9 @@ export class VerificationStepComponent implements OnInit {
   xsdFileName = 'pdi-schema.xsd';
   jsonFileType = 'text/json';
   xsdFileType = 'text/xml';
+  treeSelector = '.verify-tree';
   treeNodeSelector = '.verify-tree .node-wrapper';
+  treeScrollDivSelector = '.verify-tree tree-viewport';
   constructor(
     private fileUploadService: FileUploadService,
     private commonFnService: CommonFnService

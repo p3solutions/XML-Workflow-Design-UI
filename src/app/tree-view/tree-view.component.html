@@ -1,6 +1,7 @@
-<app-search-node [nodeTree]="tree" [searchContainerSelector]="'.lhs-tree'"></app-search-node>
+<app-search-node [nodeTree]="tree" [searchContainerSelector]="lhsTreeSelector"></app-search-node>
+<app-scroll-top-bottom [scrollDivToTop]="false" [scrollDivSelector]="lhsTreeScrollDivSelector"></app-scroll-top-bottom>
 <tree-root #tree [nodes]="nodes?.data?.treeview?.fileValue?.tree" [options]="options" (toggleExpanded)="onToggle()" 
-(initialized)="onInitialized($event)" (changeFilter)="onFiltered()">
+    (initialized)="onInitialized($event)" (changeFilter)="onFiltered()">
     <ng-template #treeNodeTemplate let-node let-index="index">
         <span *ngIf="node.isAttribute" class="attr-icon">@</span>
         <span *ngIf="!node.isAttribute" class="attr-icon">e</span>
@@ -9,3 +10,5 @@
         </span>
     </ng-template>
 </tree-root>
+<app-scroll-top-bottom [scrollDivToTop]="true" [scrollDivSelector]="lhsTreeScrollDivSelector"></app-scroll-top-bottom>
+

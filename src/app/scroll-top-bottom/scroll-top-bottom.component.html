@@ -1,0 +1,6 @@
+<button *ngIf="!scrollDivToTop" class="btn scroll-to-bottom" (click)="scrollElement()">
+  <fa name="arrow-down fa-lg"></fa>
+</button>
+<button *ngIf="scrollDivToTop" class="btn scroll-to-top" (click)="scrollElement()">
+  <fa name="arrow-up fa-lg"></fa>
+</button>

@@ -10,7 +10,8 @@
     </div>
   </div>
   <div class="card-body scrollable-height rhs-tree">
-    <app-search-node [nodeTree]="tree" [searchContainerSelector]="'.rhs-tree'"></app-search-node>
+    <app-search-node [nodeTree]="tree" [searchContainerSelector]="rhsTreeSelector"></app-search-node>
+    <app-scroll-top-bottom [scrollDivToTop]="false" [scrollDivSelector]="rhsTreeScrollDivSelector"></app-scroll-top-bottom>
     <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle($event)"
       (initialized)="onInitialized($event)" (copyNode)="onCopyNode($event)" (changeFilter)="onFiltered($event)">
       <ng-template #treeNodeTemplate let-node let-index="index">
@@ -46,6 +47,7 @@
         </span>
       </ng-template>
     </tree-root>
+    <app-scroll-top-bottom [scrollDivToTop]="true" [scrollDivSelector]="rhsTreeScrollDivSelector"></app-scroll-top-bottom>
   </div>
 </div>
 <a id="confirm-delete" class="hide" data-toggle="modal" data-target="#confirmDeleteModal"></a>

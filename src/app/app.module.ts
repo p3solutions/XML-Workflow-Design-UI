@@ -25,6 +25,7 @@ import { StructureDefinitionComponent } from './structure-definition/structure-d
 import { FileUploadService } from './file-upload/file-upload.service';
 import { CommonFnService } from './common-fn.service';
 import { SearchNodeComponent } from './search-node/search-node.component';
+import { ScrollTopBottomComponent } from './scroll-top-bottom/scroll-top-bottom.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { SearchNodeComponent } from './search-node/search-node.component';
     DefinitionStepComponent,
     VerificationStepComponent,
     StructureDefinitionComponent,
-    SearchNodeComponent
+    SearchNodeComponent,
+    ScrollTopBottomComponent
   ],
   imports: [
     BrowserModule,

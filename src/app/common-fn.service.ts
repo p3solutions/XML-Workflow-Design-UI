@@ -16,7 +16,7 @@ export class CommonFnService {
     };
   })();
   defaultInterval = 1000;
-
+  scrollSpeed = 'slow';
   constructor() { }
 
   expandNode(node) {
@@ -27,8 +27,8 @@ export class CommonFnService {
   }
   onInitialized(_event, selector) {
     const checkRoot = () => { // instantly root is not available hence using setTimeout
-      if (_event.treeModel && _event.treeModel.roots &&
-        _event.treeModel.roots.length > 0) {
+      if (_event.treeModel && _event.treeModel.nodes &&
+        _event.treeModel.nodes[0].children.length > 0) {
         this.expandNode(_event.treeModel.roots[0]);
         clearInterval(intervalFnId);
         this.colorTreeWithDelay(selector, 10);
@@ -37,19 +37,6 @@ export class CommonFnService {
     const intervalFnId = setInterval(checkRoot, 100);
   }
 
-  toggleInputBox(containerSelector) {
-    const _selector = $(containerSelector).length > 0 ? $(containerSelector + ' .search-node-div') : $('.search-node-div');
-    const isExpanded = _selector.hasClass('expand');
-    const inputBox = $(containerSelector + ' .search-input');
-    if (isExpanded) {
-      _selector.removeClass('expand');
-      inputBox.val('').keyup();
-
-    } else {
-      _selector.addClass('expand');
-      inputBox.focus();
-    }
-  }
   colorTreeLater(selector) {
     this.colorTreeWithDelay(selector, this.defaultInterval);
   }
@@ -67,5 +54,15 @@ export class CommonFnService {
         $(el).css(styleObj);
       });
     }, ms);
+  }
+
+  scrollTopBottom(element, toTop) {
+    let scrollHeight = 0;
+    if (!toTop) {
+      scrollHeight = element.scrollHeight;
+    }
+    $(element).animate({
+          scrollTop: scrollHeight
+    }, this.scrollSpeed);
   }
 }

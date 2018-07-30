@@ -67,7 +67,9 @@ export class StructureDefinitionComponent implements OnInit {
   selectedNode: any;
   selectedConditionList = new Map();
   selectedConditionArray = [];
+  rhsTreeSelector = '.rhs-tree';
   rhsTreeNodeSelector = '.rhs-tree .node-wrapper';
+  rhsTreeScrollDivSelector = '.rhs-tree tree-viewport';
   constructor(
     private commonFnService: CommonFnService
   ) { }
@@ -250,6 +252,10 @@ export class StructureDefinitionComponent implements OnInit {
   }
   onFiltered(e) {
     this.colorCurrentTree();
+  }
+  scrollElement(toTop) {
+    const element = document.querySelector(this.rhsTreeScrollDivSelector);
+    this.commonFnService.scrollTopBottom(element, toTop);
   }
 }
 

@@ -36,7 +36,9 @@ export class TreeViewComponent implements OnInit, OnChanges {
     }
   };
   treeSeed: any;
+  lhsTreeSelector = '.lhs-tree';
   lhsTreeNodeSelector = '.lhs-tree .node-wrapper';
+  lhsTreeScrollDivSelector = '.lhs-tree tree-viewport';
   constructor(
     private route: ActivatedRoute,
     private treeViewService: TreeViewService,
