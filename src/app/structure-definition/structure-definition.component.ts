@@ -70,6 +70,8 @@ export class StructureDefinitionComponent implements OnInit {
   rhsTreeSelector = '.rhs-tree';
   rhsTreeNodeSelector = '.rhs-tree .node-wrapper';
   rhsTreeScrollDivSelector = '.rhs-tree tree-viewport';
+  disableOkBtn = false;
+  errorClass = 'alert-danger';
   constructor(
     private commonFnService: CommonFnService
   ) { }
@@ -213,11 +215,33 @@ export class StructureDefinitionComponent implements OnInit {
 
   openEditModal(node) {
     this.selectedNode = node;
+    if (this.selectedNode.data.datatype === 'DATE' || this.selectedNode.data.datatype === 'DATETIME') {
+      const conditionVal = this.selectedNode.data.conditionvalue.split(' ');
+      this.selectedNode.data.conditionvalueDate = conditionVal[0];
+      this.selectedNode.data.conditionvalueTime = conditionVal[1];
+    } else if (this.selectedNode.data.datatype === 'INTEGER' || this.selectedNode.data.datatype === 'LONG') {
+      this.selectedNode.data.conditionvalueInt = this.selectedNode.data.conditionvalue;
+    }  else if (this.selectedNode.data.datatype === 'DOUBLE') {
+      this.selectedNode.data.conditionvalueDouble = this.selectedNode.data.conditionvalue;
+    }
     setTimeout(() => {
       document.getElementById('open-edit-modal').click();
     }, 10);
   }
   savePropertyChanges() {
+    if (this.selectedNode.data.datatype === 'DATE') {
+      this.selectedNode.data.conditionvalue = this.selectedNode.data.conditionvalueDate;
+    } else if (this.selectedNode.data.datatype === 'DATETIME') {
+      this.selectedNode.data.conditionvalue = this.selectedNode.data.conditionvalueDate + ' ' + this.selectedNode.data.conditionvalueTime;
+    } else if (this.selectedNode.data.datatype === 'INTEGER' || this.selectedNode.data.datatype === 'LONG') {
+      this.selectedNode.data.conditionvalue = this.selectedNode.data.conditionvalueInt;
+    } else if (this.selectedNode.data.datatype === 'DOUBLE') {
+      this.selectedNode.data.conditionvalue = this.selectedNode.data.conditionvalueDouble;
+    }
+    delete this.selectedNode.data.conditionvalueDate;
+    delete this.selectedNode.data.conditionvalueTime;
+    delete this.selectedNode.data.conditionvalueInt;
+    delete this.selectedNode.data.conditionvalueDouble;
     this.saveTree();
     this.selectedNode = null;
   }
@@ -256,6 +280,33 @@ export class StructureDefinitionComponent implements OnInit {
   scrollElement(toTop) {
     const element = document.querySelector(this.rhsTreeScrollDivSelector);
     this.commonFnService.scrollTopBottom(element, toTop);
+  }
+  allowOnlyNumbers(_event, dataType) { // on keydown event
+    let enablePeriod = false;
+    if (dataType === 'DOUBLE') {
+      enablePeriod = true;
+    }
+    this.commonFnService.allowOnlyNumbers(_event, enablePeriod);
+  }
+  // TODO: value of invalid date/time gives empty string so we can't decide if user entered invalid data or
+  // wanted to go with empty string as it is temporary we should consider empty data also
+  validateOnChange(_event) { // on keyup/change event
+    // const target = _event.target;
+    // const val = target.value;
+    // console.log('changed', val, this.selectedNode.data.dataType);
+    // let isValid = true;
+    // if (this.selectedNode.data.dataType === 'DOUBLE' && (val[val.length - 1] === '.')) {
+    //   isValid = false;
+    // } else if (this.selectedNode.data.dataType === 'DATE' && val === '') {
+    //   isValid = false;
+    // }
+    // if (isValid || val === '') {
+    //   $(target).addClass(this.errorClass);
+    //   this.disableOkBtn = true;
+    // } else {
+    //   $(target).removeClass(this.errorClass);
+    //   this.disableOkBtn = false;
+    // }
   }
 }
 

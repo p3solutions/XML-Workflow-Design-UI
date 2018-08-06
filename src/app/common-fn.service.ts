@@ -65,4 +65,20 @@ export class CommonFnService {
           scrollTop: scrollHeight
     }, this.scrollSpeed);
   }
+  allowOnlyNumbers(e, enablePeriod) { // call at keydown event
+    const ctrlA = (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true));
+    const ctrlC = (e.keyCode === 67 && (e.ctrlKey === true || e.metaKey === true));
+    const ctrlV = (e.keyCode === 86 && (e.ctrlKey === true || e.metaKey === true));
+    const ctrlX = (e.keyCode === 88 && (e.ctrlKey === true || e.metaKey === true));
+    const allowPeriod = !(enablePeriod && e.keyCode === 190 && e.target.value.indexOf('.') === -1);
+    const notNum = e.shiftKey || (!(e.keyCode === 8) && // backspace
+      (e.keyCode < 35 || e.keyCode > 40) &&
+      !(e.keyCode === 46) && // delete
+      !(e.keyCode === 13) && // enter
+      !(e.keyCode === 9) && // tab
+      (e.keyCode < 48 || e.keyCode > 57));
+    if (notNum && !ctrlA && !ctrlC && !ctrlX && !ctrlV && allowPeriod) { // allowing Ctrl combo keys & disallowing non-numbers
+      e.preventDefault();
+    }
+  }
 }
