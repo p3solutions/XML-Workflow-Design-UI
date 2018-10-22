@@ -4,16 +4,29 @@
       <div class="card-header">
         Final structure to be generated:
       </div>
-      <div class="card-body scrollable-height">
-        <tree-root [nodes]="nodes ? nodes : null" [options]="options"
-          (toggleExpanded)="onToggle()" (initialized)="onInitialized($event)"></tree-root>
+      <div class="card-body scrollable-height verify-tree">
+        <app-search-node [nodeTree]="tree" [searchContainerSelector]="treeSelector"></app-search-node>
+        <app-scroll-top-bottom [scrollDivToTop]="false" [scrollDivSelector]="treeScrollDivSelector"></app-scroll-top-bottom>
+        <tree-root #tree [nodes]="nodes ? nodes : null" [options]="options" (toggleExpanded)="onToggle()"
+          (initialized)="onInitialized($event)" (changeFilter)="onFiltered()">
+          <ng-template #treeNodeTemplate let-node let-index="index">
+              <span *ngIf="node.isAttribute" class="attr-icon">@</span>
+              <span *ngIf="!node.isAttribute" class="attr-icon">e</span>
+              <span class="config-text node-name" [ngClass]="{'selected-to-delete': node.isSelected, 'alert-warning': node.stringMatched}">
+                <span tabindex="0" role="button" id="node-{{node.data.id}}">{{ node.data.name }}</span>
+              </span>
+          </ng-template>
+        </tree-root>
+        <app-scroll-top-bottom [scrollDivToTop]="true" [scrollDivSelector]="treeScrollDivSelector"></app-scroll-top-bottom>
       </div>
     </div>
   </div>
   <div class="col-md-2">
-    <button type="button" class="btn btn-secondary submit-btn m-20" style="display: none;">Generate PDI Metadata</button>
-    <button type="button" class="btn btn-secondary submit-btn" (click)="downloadFile()">Generate WorkFlow
-      <fa *ngIf="loader" name="spinner fa-spin"></fa>
+    <button type="button" class="btn btn-secondary submit-btn m-b-10" (click)="downloadPDIfile()">Generate PDI File
+      <fa *ngIf="pdiLoader" name="spinner fa-spin"></fa>
+    </button>
+    <button type="button" class="btn btn-secondary submit-btn" (click)="downloadJSONfile()">Generate WorkFlow
+      <fa *ngIf="jsonLoader" name="spinner fa-spin"></fa>
     </button>
   </div>
 </div>

@@ -1,0 +1,17 @@
+.search-node-div {
+  z-index: 100;
+  padding: 0 0 10px 0;
+}
+.search-node-div .search-icon {
+  position: absolute;
+  margin: 5px;
+  cursor: pointer;
+}
+.search-node-div .search-input {
+  padding: 1px 1px 1px 25px;
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  font-weight: bold;
+  border: 1px solid #aeaeae;
+}

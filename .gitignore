@@ -5,6 +5,10 @@
 /tmp
 /out-tsc
 
+#patch
+.diff
+.patch
+
 # dependencies
 /node_modules
 

@@ -1,0 +1,7 @@
+<div id="search-node-div" class="search-node-div">
+  <i aria-hidden="true" class="fa fa-search search-icon"></i>
+  <div class="search-input-div">
+    <input #filter (keyup)="filterNodes(filter.value, $event)" placeholder="Filter nodes"
+    class="search-input btn"/>
+  </div>
+</div>
