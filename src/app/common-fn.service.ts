@@ -27,8 +27,8 @@ export class CommonFnService {
   }
   onInitialized(_event, selector) {
     const checkRoot = () => { // instantly root is not available hence using setTimeout
-      if (_event.treeModel && _event.treeModel.nodes &&
-        _event.treeModel.nodes[0].children.length > 0) {
+      if (_event.treeModel && _event.treeModel.nodes && _event.treeModel.nodes[0] &&
+        _event.treeModel.nodes[0].children && _event.treeModel.nodes[0].children.length > 0) {
         this.expandNode(_event.treeModel.roots[0]);
         clearInterval(intervalFnId);
         this.colorTreeWithDelay(selector, 10);
