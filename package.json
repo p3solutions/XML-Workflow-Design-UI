@@ -36,7 +36,7 @@
     "angular-tree-component": "^7.2.1",
     "bootstrap": "^4.3.1",
     "core-js": "^2.6.9",
-    "datatables.net": "^1.10.19",
+    "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.10.19",
     "font-awesome": "^4.7.0",
     "jquery": "^3.4.1",
